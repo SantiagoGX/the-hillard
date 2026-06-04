@@ -155,6 +155,11 @@
     .reserve .headline { color: var(--warm-white); margin-bottom: 1rem; }
     .reserve .subheadline { color: rgba(245,239,230,0.62); margin-bottom: 3rem; }
     .reserve-btns { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
+    /* Guesty widget overrides */
+    #search-widget_IO312PWQ { display: block; width: 100%; }
+    #search-widget_IO312PWQ > div,
+    .guesty-search-bar,
+    [class*="guesty"] { box-sizing: border-box; }
 
     /* FOOTER */
     footer { background: var(--primary); color: rgba(245,239,230,0.65); padding: 4rem 3.5rem 2.5rem; }
@@ -369,12 +374,14 @@
 
 <section class="reserve" id="reserve">
   <div class="section-inner">
-    <span class="label label-light fade-up" style="color:var(--gold);opacity:0.85;">Reserve Your Stay</span>
-    <h2 class="headline fade-up d1" style="color:var(--warm-white);">The Whole House.<br><em>Just for You.</em></h2>
-    <p class="subheadline fade-up d2" style="margin-top:1rem;">Check dates, ask questions, and begin planning your stay at The Hillard.</p>
+    <span class="label label-light" style="color:var(--gold);opacity:0.85;">Reserve Your Stay</span>
+    <h2 class="headline" style="color:var(--warm-white);">The Whole House.<br><em>Just for You.</em></h2>
+    <p class="subheadline" style="margin-top:1rem;">Check availability and book directly — or reach out for a private group inquiry.</p>
+    <div style="max-width:860px;margin:0 auto 2.5rem;">
+      <div id="search-widget_IO312PWQ"><script>!function(e,t,a,n,c,r){function s(t){e.console.log("[Guesty Embedded Widget]:",t)}var i,d,l,o,y,m,g,h,p,u;n&&(i=n,d=t.getElementsByTagName("head")[0],(l=t.createElement("link")).rel="stylesheet",l.type="text/css",l.href=i,l.media="all",d.appendChild(l)),o=function(){try{e[a].create(r).catch(function(e){s(e.message)})}catch(e){s(e.message)}},h=!1,y=c,m=function(){h||this.readyState&&"complete"!=this.readyState||(h=!0,o())},(g=t.createElement("script")).type="text/javascript",g.src=y,g.async="true",g.onload=g.onreadystatechange=m,p=g,(u=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,u)}(window,document,"GuestySearchBarWidget","https://s3.amazonaws.com/guesty-frontend-production/search-bar-production.css","https://s3.amazonaws.com/guesty-frontend-production/search-bar-production.js",{"siteUrl":"eliaupiha.guestybookings.com","color":"#C4A265"});</script></div>
+    </div>
     <div class="reserve-btns fade-up d3">
-      <a href="mailto:info@thehillard.com" class="btn btn-green">Request Availability</a>
-      <a href="tel:+15043000000" class="btn btn-ghost-light">Call to Inquire</a>
+      <a href="mailto:info@thehillard.com" class="btn btn-ghost-light">Private Group Inquiry</a>
     </div>
   </div>
 </section>
