@@ -223,13 +223,14 @@ nav.scrolled .nav-center-logo img { height: 48px; }
 
     /* MOBILE */
     @media (max-width: 900px) {
-      nav { padding: 1.2rem 1.5rem; } nav.scrolled { padding: 0.9rem 1.5rem; }
-      .nav-links, .nav-cta { display: none; } .nav-burger { display: flex; }
-      nav.nav-open { flex-wrap: wrap; padding-bottom: 1.5rem; background: var(--primary) !important; }
-      nav.nav-open .nav-links { display: flex; flex-direction: column; width: 100%; gap: 0; padding-top: 1.2rem; margin-top: 0.5rem; border-top: 1px solid rgba(245,239,230,0.12); }
-      nav.nav-open .nav-links li { border-bottom: 1px solid rgba(245,239,230,0.07); }
-      nav.nav-open .nav-links a { display: block; padding: 0.9rem 0; font-size: 0.72rem; color: rgba(245,239,230,0.85); }
-      nav.nav-open .nav-cta { display: block; margin-top: 1.2rem; text-align: center; width: 100%; padding: 0.9rem; }
+      nav { padding: 0.4rem 1.5rem; }
+      nav.scrolled { padding: 0.4rem 1.5rem; }
+      /* hide side links on mobile — keep wordmark + logo + CTA */
+      .nav-left .nav-links { display: none; }
+      .nav-right .nav-links { display: none; }
+      .nav-center-logo img { height: 60px; }
+      nav.scrolled .nav-center-logo img { height: 40px; }
+      .nav-wordmark { font-size: 0.72rem; letter-spacing: 0.18em; }
       section { padding: 5rem 1.5rem; } .stats { padding: 4rem 1.5rem; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; } .about-text-col { padding-right: 0; } .about-img { height: 320px; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
