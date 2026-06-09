@@ -56,12 +56,12 @@
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: grid; grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: 0.5rem 3rem;
+  padding: 1.1rem 3rem;
   transition: background 0.45s ease, padding 0.35s ease, box-shadow 0.45s ease;
 }
 nav.scrolled {
   background: var(--primary);
-  padding: 0.55rem 3rem;
+  padding: 1rem 3rem;
   box-shadow: 0 2px 32px rgba(0,0,0,0.28);
 }
 .nav-left { display: flex; align-items: center; gap: 2.4rem; }
@@ -78,8 +78,8 @@ nav.scrolled {
 }
 .nav-links a:hover { color: var(--warm-white); }
 .nav-center-logo { text-decoration: none; display: flex; justify-content: center; }
-.nav-center-logo img { height: 82px; width: auto; display: block; opacity: .9; transition: height 0.35s ease; }
-nav.scrolled .nav-center-logo img { height: 48px; }
+.nav-center-logo img { height: 96px; width: auto; display: block; opacity: .9; transition: height 0.35s ease; }
+nav.scrolled .nav-center-logo img { height: 64px; }
 .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 2rem; }
 .nav-cta {
   font-family: var(--sans); font-size: .6rem; letter-spacing: .2em;
@@ -152,8 +152,8 @@ nav.scrolled .nav-center-logo img { height: 48px; }
 
     /* ABOUT */
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-    .about-img { height: 600px; overflow: hidden; }
-    .about-img img { height: 100%; width: 100%; object-fit: cover; }
+    .about-img { overflow: hidden; }
+    .about-img img { width: 100%; height: auto; display: block; }
     .about-text-col { padding-right: 1rem; }
     .about-text-col .headline { margin: 1rem 0 0; }
     .about-rule { width: 50px; height: 1px; background: var(--gold); margin: 2rem 0; }
@@ -168,14 +168,80 @@ nav.scrolled .nav-center-logo img { height: 48px; }
     /* SPACES */
     .spaces-header { max-width: 1240px; margin: 0 auto 3.5rem; padding: 0 3.5rem; }
     .spaces-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-    .space-card { position: relative; overflow: hidden; cursor: pointer; }
-    .space-card-img { height: 400px; overflow: hidden; }
+    .space-card { position: relative; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; }
+    .space-card-img { height: 400px; overflow: hidden; flex-shrink: 0; }
     .space-card-img img { height: 100%; width: 100%; object-fit: cover; transition: transform 0.7s ease; }
     .space-card:hover .space-card-img img { transform: scale(1.06); }
-    .space-card-body { background: var(--warm-white); padding: 1.8rem; }
+    .space-card-body { background: var(--warm-white); padding: 1.8rem; flex: 1; }
     .space-card-eyebrow { font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; display: block; font-family: var(--sans); }
     .space-card-title { font-family: var(--serif); font-size: 1.5rem; color: var(--charcoal); margin-bottom: 0.6rem; }
     .space-card-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.8; }
+    /* SPACE CTA CARD */
+    .space-card--cta { cursor: default; }
+    .cta-card-top {
+      height: 400px; background: var(--primary); position: relative;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; overflow: hidden; padding: 2.5rem;
+    }
+    .cta-card-top::before, .cta-card-top::after {
+      content: ''; position: absolute; left: 2rem; right: 2rem;
+      height: 1px; background: rgba(196,162,101,0.28);
+    }
+    .cta-card-top::before { top: 2rem; }
+    .cta-card-top::after  { bottom: 2rem; }
+    .cta-ghost {
+      position: absolute; font-family: var(--serif); font-size: 16rem;
+      font-weight: 300; font-style: italic; line-height: 1;
+      color: rgba(196,162,101,0.07); pointer-events: none;
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      white-space: nowrap; letter-spacing: -0.04em;
+    }
+    .cta-year {
+      font-family: var(--sans); font-size: 0.6rem; letter-spacing: 0.32em;
+      text-transform: uppercase; color: rgba(196,162,101,0.6);
+      margin-bottom: 1.6rem; position: relative;
+    }
+    .cta-headline { position: relative; text-align: center; }
+    .cta-headline span {
+      display: block; font-family: var(--serif); font-weight: 300;
+      font-size: 2.6rem; line-height: 1; color: rgba(245,239,230,0.88);
+      letter-spacing: 0.01em;
+    }
+    .cta-headline em {
+      display: block; font-family: var(--serif); font-style: italic;
+      font-weight: 300; font-size: 3rem; line-height: 1.05;
+      color: var(--gold); margin-top: 0.15rem;
+    }
+    .cta-rule {
+      width: 28px; height: 1px; background: rgba(196,162,101,0.45);
+      margin: 1.6rem auto 0;
+    }
+    .cta-card-body {
+      background: var(--warm-white); padding: 1.8rem; flex: 1;
+      border-top: 1px solid rgba(196,162,101,0.22);
+    }
+    .cta-card-body .space-card-eyebrow { color: var(--gold); }
+    .cta-card-body .space-card-title { color: var(--charcoal); font-size: 1.5rem; }
+    .cta-card-body .space-card-text { color: var(--text-muted); }
+    .cta-reserve-link {
+      display: inline-block; margin-top: 1rem; font-family: var(--sans);
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); text-decoration: none;
+      border-bottom: 1px solid rgba(196,162,101,0.35); padding-bottom: 2px;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .cta-reserve-link:hover { border-color: var(--gold); color: rgba(196,162,101,0.9); }
+    /* SPACES TABS */
+    .spaces-tab-bar { display: flex; border-bottom: 1px solid rgba(28,37,53,.1); }
+    .tab-btn { flex: 1; font-family: var(--sans); font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; color: var(--text-muted); background: none; border: none; border-bottom: 2px solid transparent; padding: 1.4rem 2rem 1.25rem; cursor: pointer; margin-bottom: -1px; transition: color .3s, border-color .3s, background .3s; text-align: center; }
+    .tab-btn:hover { color: var(--charcoal); background: rgba(28,37,53,.03); }
+    .tab-btn.active { color: var(--charcoal); border-bottom-color: var(--gold); background: rgba(196,162,101,.04); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+    .spaces-more { padding: 2.5rem 3.5rem; background: var(--warm-white); border-top: 1px solid rgba(28,37,53,.07); }
+    .spaces-more p { font-family: var(--sans); font-size: .78rem; letter-spacing: .04em; color: var(--text-muted); }
+    .spaces-more a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(196,162,101,.35); transition: border-color .3s; }
+    .spaces-more a:hover { border-color: var(--gold); }
 
     /* AMENITIES */
     .amenities { background: var(--primary); color: var(--warm-white); }
@@ -196,10 +262,10 @@ nav.scrolled .nav-center-logo img { height: 48px; }
     .events-banner-content .subheadline { color: rgba(245,239,230,0.72); margin-bottom: 2.5rem; }
 
     /* GALLERY */
-    .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 280px; gap: 3px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 260px; gap: 4px; }
     .gallery-cell { overflow: hidden; }
-    .gallery-cell img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-    .gallery-cell:hover img { transform: scale(1.05); }
+    .gallery-cell img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
+    .gallery-cell:hover img { transform: scale(1.06); }
     .gallery-cell.tall { grid-row: span 2; }
     .gallery-cell.wide { grid-column: span 2; }
 
@@ -244,12 +310,12 @@ nav.scrolled .nav-center-logo img { height: 48px; }
       nav.scrolled .nav-center-logo img { height: 40px; }
       .nav-wordmark { font-size: 0.72rem; letter-spacing: 0.18em; }
       section { padding: 5rem 1.5rem; } .stats { padding: 4rem 1.5rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; } .about-text-col { padding-right: 0; } .about-img { height: 320px; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; } .about-text-col { padding-right: 0; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .spaces-header { padding: 0 1.5rem; }
       .spaces-grid { grid-template-columns: 1fr; } .space-card-img { height: 260px; }
       .amenities-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .gallery-grid { grid-template-columns: repeat(2,1fr); grid-auto-rows: 180px; }
+      .gallery-grid { grid-template-columns: repeat(2,1fr); grid-auto-rows: 200px; }
       .gallery-cell.tall { grid-row: span 1; } .gallery-cell.wide { grid-column: span 1; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; gap: 0.8rem; text-align: center; }
@@ -342,7 +408,7 @@ nav.scrolled .nav-center-logo img { height: 48px; }
 <section id="about">
   <div class="section-inner about-grid">
     <div class="about-img fade-left">
-      <img src="photos/about.jpg" alt="Interior of The Hillard" loading="lazy" />
+      <img src="photos/about-new.jpg" alt="Interior of The Hillard" loading="lazy" />
     </div>
     <div class="about-text-col fade-right">
       <span class="label">About the Estate</span>
@@ -373,59 +439,180 @@ nav.scrolled .nav-center-logo img { height: 48px; }
   <div class="spaces-header section-inner">
     <span class="label fade-up">The Spaces</span>
     <h2 class="headline fade-up d1" style="margin-top:1rem;">Every Room<br><em>Has a Story</em></h2>
-    <p class="subheadline fade-up d2" style="margin-top:1rem;max-width:560px;">Nine thoughtfully appointed bedrooms and grand communal spaces — each with its own character and century of history.</p>
+    <p class="subheadline fade-up d2" style="margin-top:1rem;max-width:560px;">10 bedrooms across three floors, grand communal spaces, and 9 bathrooms — each with its own character and a century of history.</p>
+  </div>
+  <div class="spaces-tab-bar">
+    <button class="tab-btn active" data-tab="communal">Common Spaces</button>
+    <button class="tab-btn" data-tab="bedrooms">Bedrooms</button>
   </div>
 </section>
-<div class="spaces-grid">
-  <div class="space-card fade-up">
-    <div class="space-card-img"><img src="photos/salon.jpg" alt="The Grand Salon" loading="lazy" /></div>
-    <div class="space-card-body">
-      <span class="space-card-eyebrow">Main Floor</span>
-      <h3 class="space-card-title">The Grand Parlor</h3>
-      <p class="space-card-text">Original parquet flooring, plaster cornice medallions, a crystal chandelier, and a baby grand piano. The room that stops guests in their doorway.</p>
+
+<div class="tab-pane active" id="tab-communal">
+  <div class="spaces-grid">
+    <div class="space-card fade-up">
+      <div class="space-card-img"><img src="photos/spaces-parlor.jpg" alt="The Grand Parlor" loading="lazy" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">Main Floor</span>
+        <h3 class="space-card-title">The Grand Parlor</h3>
+        <p class="space-card-text">Original parquet flooring, plaster cornice medallions, a crystal chandelier, and a baby grand piano. The room that stops guests in their doorway.</p>
+      </div>
     </div>
-  </div>
-  <div class="space-card fade-up d1">
-    <div class="space-card-img"><img src="photos/dining.jpg" alt="The Formal Dining Room" loading="lazy" /></div>
-    <div class="space-card-body">
-      <span class="space-card-eyebrow">Main Floor</span>
-      <h3 class="space-card-title">The Formal Dining Room</h3>
-      <p class="space-card-text">Twelve-foot ceilings, the original crystal chandelier, and parquet floors that have hosted celebrations for over 150 years. Seats the whole group in style.</p>
+    <div class="space-card fade-up d1">
+      <div class="space-card-img"><img src="photos/spaces-dining.jpg" alt="The Formal Dining Room" loading="lazy" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">Main Floor</span>
+        <h3 class="space-card-title">The Formal Dining Room</h3>
+        <p class="space-card-text">Twelve-foot ceilings, the original crystal chandelier, and parquet floors that have hosted celebrations for over 150 years. Seats the whole group in style.</p>
+      </div>
     </div>
-  </div>
-  <div class="space-card fade-up d2">
-    <div class="space-card-img"><img src="photos/kitchen.jpg" alt="The Chef's Kitchen" loading="lazy" /></div>
-    <div class="space-card-body">
-      <span class="space-card-eyebrow">Main Floor</span>
-      <h3 class="space-card-title">The Chef's Kitchen</h3>
-      <p class="space-card-text">Viking range, double ovens, Sub-Zero refrigerator, marble island, globe pendant lights, and everything needed to cook for a crowd.</p>
+    <div class="space-card fade-up d2">
+      <div class="space-card-img"><img src="photos/spaces-kitchen-wide.jpg" alt="The Chef's Kitchen" loading="lazy" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">Main Floor</span>
+        <h3 class="space-card-title">The Chef's Kitchen</h3>
+        <p class="space-card-text">Viking range, double ovens, Sub-Zero refrigerator, marble island, globe pendant lights, and everything needed to cook for a crowd.</p>
+      </div>
     </div>
-  </div>
-  <div class="space-card fade-up">
-    <div class="space-card-img"><img src="photos/fourposter.jpg" alt="The Heritage Suite" loading="lazy" /></div>
-    <div class="space-card-body">
-      <span class="space-card-eyebrow">Upper Floor — Primary Suite</span>
-      <h3 class="space-card-title">The Heritage Suite</h3>
-      <p class="space-card-text">The crown jewel of the house — a carved four-poster canopy bed, original marble fireplace, 12-foot ceilings, and a whirlpool soaking tub in the en-suite bath.</p>
+    <div class="space-card fade-up d3">
+      <div class="space-card-img"><img src="photos/spaces-staircase.jpg" alt="The Grand Staircase" loading="lazy" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">Throughout the House</span>
+        <h3 class="space-card-title">The Grand Staircase</h3>
+        <p class="space-card-text">A sweeping curved staircase with original carved banister, red carpet runner, and wall sconces — the architectural heart of the mansion.</p>
+      </div>
     </div>
-  </div>
-  <div class="space-card fade-up d1">
-    <div class="space-card-img"><img src="photos/roseroom.jpg" alt="The Rose Room" loading="lazy" /></div>
-    <div class="space-card-body">
-      <span class="space-card-eyebrow">Upper Floor</span>
-      <h3 class="space-card-title">The Rose Room</h3>
-      <p class="space-card-text">Soft floral wallpaper, high ceilings, original hardwood floors, and two graceful iron beds. Quiet romance and heirloom charm.</p>
+    <div class="space-card fade-up d4">
+      <div class="space-card-img"><img src="photos/spaces-musicroom.jpg" alt="The Music Room" loading="lazy" style="object-position: center 20%;" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">Main Floor</span>
+        <h3 class="space-card-title">The Music Room</h3>
+        <p class="space-card-text">A Ludwig baby grand beneath a crystal chandelier, bookshelves lining the walls, and original plaster molding. Two pianos. One unforgettable room.</p>
+      </div>
     </div>
-  </div>
-  <div class="space-card fade-up d2">
-    <div class="space-card-img"><img src="photos/crimson.jpg" alt="The Crimson Suite" loading="lazy" /></div>
-    <div class="space-card-body">
-      <span class="space-card-eyebrow">Upper Floor</span>
-      <h3 class="space-card-title">The Crimson Suite</h3>
-      <p class="space-card-text">Deep crimson walls, leather furnishings, marble fireplace, and dramatic atmosphere. The room guests never want to leave.</p>
+    <div class="space-card fade-up d5">
+      <div class="space-card-img"><img src="photos/spaces-pool.jpg" alt="The Private Pool" loading="lazy" style="object-position: center 30%;" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">Outdoor</span>
+        <h3 class="space-card-title">The Private Pool</h3>
+        <p class="space-card-text">A large heated swim spa and jacuzzi — exclusively yours. Open year-round, lit at night, and set in the private garden behind the mansion.</p>
+      </div>
     </div>
   </div>
 </div>
+
+<div class="tab-pane" id="tab-bedrooms">
+  <div class="spaces-grid">
+    <div class="space-card fade-up">
+      <div class="space-card-img"><img src="photos/spaces-heritage.jpg" alt="The Heritage Suite" loading="lazy" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">Upper Floor — Primary Suite</span>
+        <h3 class="space-card-title">The Heritage Suite</h3>
+        <p class="space-card-text">Four-poster canopy bed, original marble fireplace, 12-foot ceilings, and a whirlpool soaking tub en-suite.</p>
+      </div>
+    </div>
+    <div class="space-card fade-up d1">
+      <div class="space-card-img"><img src="photos/spaces-roseroom.jpg" alt="The Rose Room" loading="lazy" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">Upper Floor</span>
+        <h3 class="space-card-title">The Rose Room</h3>
+        <p class="space-card-text">Soft floral wallpaper, original hardwood floors, and two graceful iron beds. Quiet romance and heirloom charm.</p>
+      </div>
+    </div>
+    <div class="space-card fade-up d2">
+      <div class="space-card-img"><img src="photos/spaces-crimson-red.jpg" alt="The Crimson Suite" loading="lazy" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">First Floor</span>
+        <h3 class="space-card-title">The Crimson Suite</h3>
+        <p class="space-card-text">Deep crimson walls, marble fireplace, leather sofa, crystal chandelier, and a queen bed. The most dramatic room in the house.</p>
+      </div>
+    </div>
+    <div class="space-card fade-up d3">
+      <div class="space-card-img"><img src="photos/spaces-library.jpg" alt="The Library Room" loading="lazy" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">Upper Floor</span>
+        <h3 class="space-card-title">The Library Room</h3>
+        <p class="space-card-text">Original parquet floors, marble fireplace, crystal chandelier, and soaring ceilings. A quiet, elegant retreat with sofa bed.</p>
+      </div>
+    </div>
+    <div class="space-card fade-up d4">
+      <div class="space-card-img"><img src="photos/spaces-bunkroom.jpg" alt="The Family Room" loading="lazy" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">Upper Floor</span>
+        <h3 class="space-card-title">The Family Room</h3>
+        <p class="space-card-text">Two sets of bunk beds sleeping up to six. Perfect for kids or large groups who want to share the floor together.</p>
+      </div>
+    </div>
+    <div class="space-card fade-up d5">
+      <div class="space-card-img"><img src="photos/spaces-room4.jpg" alt="Double Guest Room" loading="lazy" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">Upper Floor</span>
+        <h3 class="space-card-title">The Double Room</h3>
+        <p class="space-card-text">Two double beds, original wallpaper, hardwood floors, and a window overlooking the grounds. Comfortable and quietly elegant.</p>
+      </div>
+    </div>
+    <div class="space-card fade-up">
+      <div class="space-card-img"><img src="photos/spaces-room5.jpg" alt="Room 5" loading="lazy" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">Third Floor</span>
+        <h3 class="space-card-title">The Arched Room</h3>
+        <p class="space-card-text">A quiet queen room with a distinctive arched window, pendant light, and original hardwood floors. Bright and serene.</p>
+      </div>
+    </div>
+    <div class="space-card fade-up d1">
+      <div class="space-card-img"><img src="photos/spaces-room6.jpg" alt="Room 6" loading="lazy" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">Upper Floor</span>
+        <h3 class="space-card-title">The Garden Room</h3>
+        <p class="space-card-text">King bed, warm wood tones, botanical art, and generous natural light. A calm retreat with a connected sitting nook.</p>
+      </div>
+    </div>
+    <div class="space-card fade-up d2">
+      <div class="space-card-img"><img src="photos/spaces-room7.jpg" alt="Room 7" loading="lazy" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">Upper Floor</span>
+        <h3 class="space-card-title">The White Room</h3>
+        <p class="space-card-text">Minimalist and airy — a single queen bed, white walls, and original hardwood floors. Simple, restful, and quietly charming.</p>
+      </div>
+    </div>
+    <div class="space-card fade-up d3">
+      <div class="space-card-img"><img src="photos/spaces-room8.jpg" alt="Room 8" loading="lazy" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">Second Floor</span>
+        <h3 class="space-card-title">The Iron Beds Room</h3>
+        <p class="space-card-text">Two full iron beds, neutral linens, and a warm rug. A comfortable and inviting room for friends or siblings sharing.</p>
+      </div>
+    </div>
+    <div class="space-card space-card--cta fade-up d4">
+      <div class="cta-card-top">
+        <div class="cta-ghost">1865</div>
+        <div class="cta-year">The Hillard &nbsp;·&nbsp; Est. 1865</div>
+        <div class="cta-headline">
+          <span>The Whole</span>
+          <em>House.</em>
+        </div>
+        <div class="cta-rule"></div>
+      </div>
+      <div class="cta-card-body">
+        <span class="space-card-eyebrow">Exclusive Occupancy</span>
+        <h3 class="space-card-title">Reserve the Estate</h3>
+        <p class="space-card-text">All 10 bedrooms. No other guests. The entire mansion — exclusively yours.</p>
+        <a href="#reserve" class="cta-reserve-link">Check Availability &rarr;</a>
+      </div>
+    </div>
+    <div class="space-card fade-up d5">
+      <div class="space-card-img"><img src="photos/spaces-room9.jpg" alt="Room 9" loading="lazy" /></div>
+      <div class="space-card-body">
+        <span class="space-card-eyebrow">Upper Floor — En-Suite</span>
+        <h3 class="space-card-title">The Green Bath Suite</h3>
+        <p class="space-card-text">A bunk-bed room with direct access to the renovated green bathroom. Ideal for younger guests or those who want a private bath.</p>
+      </div>
+    </div>
+  </div>
+  <div class="spaces-more">
+    <p>10 bedrooms across three floors — when you book, the whole house is yours. <a href="#reserve">Reserve and we'll coordinate every room assignment for your group.</a></p>
+  </div>
+</div>
+
 
 <section class="amenities" id="amenities">
   <div class="section-inner">
@@ -461,12 +648,17 @@ nav.scrolled .nav-center-logo img { height: 48px; }
   </div>
   <div class="gallery-grid">
     <div class="gallery-cell tall fade-in"><img src="photos/salon.jpg" alt="The Grand Salon" loading="lazy" /></div>
-    <div class="gallery-cell fade-in d1"><img src="photos/gallery3.jpg" alt="Chef's Kitchen" loading="lazy" /></div>
-    <div class="gallery-cell fade-in d1"><img src="photos/gallery2.jpg" alt="Original Fireplace" loading="lazy" /></div>
-    <div class="gallery-cell tall fade-in d2"><img src="photos/crimson.jpg" alt="The Crimson Suite" loading="lazy" /></div>
-    <div class="gallery-cell wide fade-in d2"><img src="photos/dining.jpg" alt="Formal Dining Room" loading="lazy" /></div>
-    <div class="gallery-cell fade-in d3"><img src="photos/gallery4.jpg" alt="Soaking Tub" loading="lazy" /></div>
-    <div class="gallery-cell fade-in d3"><img src="photos/gallery6.jpg" alt="Guest Room" loading="lazy" /></div>
+    <div class="gallery-cell fade-in d1"><img src="photos/gallery1.jpg" alt="Historic Fireplace" loading="lazy" /></div>
+    <div class="gallery-cell fade-in d1"><img src="photos/gallery2.jpg" alt="Original Detail" loading="lazy" /></div>
+    <div class="gallery-cell fade-in d2"><img src="photos/gallery3.jpg" alt="Interior" loading="lazy" /></div>
+    <div class="gallery-cell fade-in d2"><img src="photos/fourposter.jpg" alt="Heritage Suite" loading="lazy" /></div>
+    <div class="gallery-cell fade-in d3"><img src="photos/gallery4.jpg" alt="Spa Soaking Tub" loading="lazy" /></div>
+    <div class="gallery-cell wide fade-in d3"><img src="photos/dining.jpg" alt="Formal Dining Room" loading="lazy" /></div>
+    <div class="gallery-cell fade-in d4"><img src="photos/kitchen.jpg" alt="Chef's Kitchen" loading="lazy" /></div>
+    <div class="gallery-cell fade-in d4"><img src="photos/roseroom.jpg" alt="The Rose Room" loading="lazy" /></div>
+    <div class="gallery-cell fade-in d4"><img src="photos/crimson.jpg" alt="The Crimson Suite" loading="lazy" /></div>
+    <div class="gallery-cell wide fade-in d5"><img src="photos/bath-black.jpg" alt="The Black Bath" loading="lazy" /></div>
+    <div class="gallery-cell fade-in d5"><img src="photos/bath-shower.jpg" alt="Green Shower" loading="lazy" /></div>
   </div>
 </section>
 
@@ -480,20 +672,9 @@ nav.scrolled .nav-center-logo img { height: 48px; }
   <div class="section-inner">
     <span class="label label-light" style="color:var(--gold);opacity:0.85;">Reserve Your Stay</span>
     <h2 class="headline" style="color:var(--warm-white);">The Whole House.<br><em>Just for You.</em></h2>
-    <p class="subheadline" style="margin-top:1rem;">Check availability and book directly — or reach out for a private group inquiry.</p>
-    <div style="max-width:1100px;margin:2.5rem auto 2rem;border-radius:4px;overflow:hidden;box-shadow:0 8px 48px rgba(0,0,0,0.35);">
-      <iframe
-        src="https://thehillard.guestybookings.com/en"
-        width="100%"
-        height="820"
-        frameborder="0"
-        scrolling="auto"
-        allow="payment"
-        title="Check Availability — The Hillard"
-        style="display:block;border:none;background:#fff;">
-      </iframe>
-    </div>
-    <div class="reserve-btns fade-up d3">
+    <p class="subheadline" style="margin-top:1rem;">The Hillard is available for exclusive whole-house reservations. Contact us directly to check availability and secure your dates.</p>
+    <div class="reserve-btns fade-up d2" style="margin-top:2.5rem;">
+      <a href="mailto:info@thehillard.com" class="btn btn-green">Reserve the House</a>
       <a href="mailto:info@thehillard.com" class="btn btn-ghost-light">Private Group Inquiry</a>
     </div>
   </div>
@@ -560,6 +741,21 @@ nav.scrolled .nav-center-logo img { height: 48px; }
   }, { threshold: 0.05 });
 
   document.querySelectorAll('.fade-up, .fade-in, .fade-left, .fade-right').forEach(el => observer.observe(el));
+
+  // Spaces tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const pane = document.getElementById('tab-' + btn.dataset.tab);
+      pane.classList.add('active');
+      pane.querySelectorAll('.fade-up, .fade-in').forEach(el => {
+        el.classList.remove('visible');
+        setTimeout(() => el.classList.add('visible'), 60);
+      });
+    });
+  });
 </script>
 </body>
 </html>
