@@ -277,7 +277,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
     }
 
     /* TESTIMONIAL */
-    .testimonial { background: var(--cream-dark); padding: 6rem 3.5rem; text-align: center; }
+    .testimonial { background: var(--cream); padding: 6rem 3.5rem; text-align: center; }
     .testimonial-rule { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 2rem; }
     .testimonial blockquote { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.3rem); font-style: italic; font-weight: 400; color: var(--charcoal); max-width: 820px; margin: 0 auto 1.8rem; line-height: 1.4; }
     .testimonial cite { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); }
@@ -332,6 +332,63 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       .hero-bg { transition: none !important; animation: none !important; }
       .hero-scroll-line { animation: none !important; opacity: 0.5; }
     }
+    /* BOOKING PANEL */
+    .booking-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(24,28,34,.6);
+      backdrop-filter: blur(3px);
+      opacity: 0; visibility: hidden;
+      transition: opacity .4s ease, visibility .4s ease;
+    }
+    .booking-overlay.open { opacity: 1; visibility: visible; }
+    .booking-panel {
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 201;
+      width: 480px; max-width: 100vw;
+      background: var(--cream);
+      display: flex; flex-direction: column;
+      transform: translateX(100%);
+      transition: transform .45s cubic-bezier(.4,0,.2,1);
+      overflow-y: auto;
+      box-shadow: -8px 0 48px rgba(0,0,0,.18);
+    }
+    .booking-panel.open { transform: translateX(0); }
+    .bp-header {
+      background: var(--primary); padding: 1.5rem 2rem;
+      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+    }
+    .bp-header-title { font-family: var(--serif); font-size: 1rem; letter-spacing: .22em; color: var(--warm-white); font-weight: 400; }
+    .bp-close { background: none; border: none; cursor: pointer; color: rgba(253,250,244,.6); font-size: 1.5rem; line-height: 1; padding: .2rem .4rem; transition: color .2s; }
+    .bp-close:hover { color: var(--warm-white); }
+    .bp-body { padding: 2.4rem 2rem 3rem; flex: 1; }
+    .bp-eyebrow { font-family: var(--sans); font-size: .62rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin-bottom: .5rem; }
+    .bp-title { font-family: var(--serif); font-size: 2rem; font-weight: 400; color: var(--charcoal); margin-bottom: 1.4rem; line-height: 1.1; }
+    .bp-title em { font-style: italic; }
+    .bp-divider { width: 40px; height: 1px; background: var(--gold); margin-bottom: 2rem; }
+    .bp-field { margin-bottom: 1.5rem; }
+    .bp-field label { display: block; font-family: var(--sans); font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--text-muted); margin-bottom: .5rem; }
+    .bp-field input, .bp-field textarea {
+      width: 100%; background: transparent; border: none;
+      border-bottom: 1px solid rgba(58,56,48,.22);
+      padding: .5rem 0; font-family: var(--sans); font-size: .88rem;
+      color: var(--charcoal); outline: none; font-weight: 300;
+      transition: border-color .25s; border-radius: 0;
+    }
+    .bp-field input[type="date"] { appearance: none; -webkit-appearance: none; }
+    .bp-field input:focus, .bp-field textarea:focus { border-bottom-color: var(--gold); }
+    .bp-field textarea { resize: none; height: 70px; }
+    .bp-dates { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .bp-nights-hint { font-family: var(--sans); font-size: .7rem; color: var(--gold); letter-spacing: .06em; margin-top: .4rem; min-height: 1.1em; }
+    .bp-guests-row { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(58,56,48,.22); padding: .5rem 0; }
+    .bp-guests-count { font-family: var(--serif); font-size: 1.5rem; color: var(--charcoal); min-width: 2.5rem; text-align: center; }
+    .bp-guests-btn { background: none; border: 1px solid rgba(58,56,48,.2); cursor: pointer; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; color: var(--charcoal); font-size: 1rem; transition: border-color .2s, color .2s; }
+    .bp-guests-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .bp-submit { width: 100%; margin-top: 2rem; background: var(--primary); color: var(--warm-white); border: 1px solid var(--primary); font-family: var(--sans); font-size: .62rem; letter-spacing: .26em; text-transform: uppercase; padding: 1.1rem; cursor: pointer; transition: background .3s; font-weight: 400; }
+    .bp-submit:hover { background: var(--primary-mid); }
+    .bp-success { display: none; text-align: center; padding: 4rem 1rem; }
+    .bp-success-mark { font-size: 1.8rem; color: var(--gold); margin-bottom: 1.4rem; }
+    .bp-success h3 { font-family: var(--serif); font-size: 1.7rem; margin-bottom: 1rem; color: var(--charcoal); }
+    .bp-success p { font-family: var(--sans); font-size: .8rem; color: var(--text-muted); line-height: 1.9; max-width: 300px; margin: 0 auto; }
+    @media (max-width: 540px) { .booking-panel { width: 100vw; } .bp-dates { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -352,7 +409,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       <li><a href="#events">Events</a></li>
       <li><a href="#gallery">Gallery</a></li>
     </ul>
-    <a href="#reserve" class="nav-cta">Inquire &amp; Reserve</a>
+    <button type="button" id="booking-trigger" class="nav-cta">Inquire &amp; Reserve</button>
   </div>
 </nav>
 
@@ -363,7 +420,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
     <h1 class="hero-title fade-up d1">A House<br><em>Reserved</em><br>for&nbsp;You</h1>
     <p class="hero-sub fade-up d2">A grand 1865 Second Empire mansion on the Susquehanna River — yours alone. No shared lobbies, no strangers. Just your people, your memories, and a home built to last centuries.</p>
     <div class="hero-btns fade-up d3">
-      <a href="#reserve" class="btn btn-green">Reserve the House</a>
+      <button type="button" class="btn btn-green booking-open">Reserve the House</button>
       <a href="#spaces" class="btn btn-ghost-light">Explore the Spaces</a>
     </div>
   </div>
@@ -648,7 +705,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
   </div>
 </div>
 
-<section id="gallery" style="padding-bottom:0;">
+<section id="gallery" style="padding-bottom:4rem;">
   <div class="section-inner" style="padding-bottom:3rem;">
     <span class="label fade-up">Gallery</span>
     <h2 class="headline fade-up d1" style="margin-top:1rem;">Life Inside<br><em>The Hillard</em></h2>
@@ -733,6 +790,79 @@ nav.scrolled .nav-center-logo img { height: 64px; }
   </div>
 </footer>
 
+<!-- BOOKING OVERLAY -->
+<div id="bookingOverlay" class="booking-overlay"></div>
+
+<!-- BOOKING PANEL -->
+<div id="bookingPanel" class="booking-panel" role="dialog" aria-modal="true" aria-label="Reserve The Hillard">
+  <div class="bp-header">
+    <span class="bp-header-title">THE HILLARD</span>
+    <button class="bp-close" id="bookingClose" aria-label="Close">&times;</button>
+  </div>
+  <div class="bp-body">
+    <p class="bp-eyebrow">Reserve Your Stay</p>
+    <h2 class="bp-title">Request<br><em>Availability</em></h2>
+    <div class="bp-divider"></div>
+
+    <div id="bpForm">
+      <form name="booking-inquiry" data-netlify="true" netlify-honeypot="bot-field" id="bookingForm">
+        <input type="hidden" name="form-name" value="booking-inquiry">
+        <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+        <div class="bp-dates">
+          <div class="bp-field">
+            <label for="bp-checkin">Check-in</label>
+            <input type="date" id="bp-checkin" name="check_in" required>
+          </div>
+          <div class="bp-field">
+            <label for="bp-checkout">Check-out</label>
+            <input type="date" id="bp-checkout" name="check_out" required>
+          </div>
+        </div>
+        <p class="bp-nights-hint" id="bp-nights"></p>
+
+        <div class="bp-field" style="margin-top:1.2rem;">
+          <label>Guests</label>
+          <div class="bp-guests-row">
+            <button type="button" class="bp-guests-btn" id="bp-guests-minus">−</button>
+            <span class="bp-guests-count" id="bp-guests-display">4</span>
+            <input type="hidden" name="guests" id="bp-guests-input" value="4">
+            <button type="button" class="bp-guests-btn" id="bp-guests-plus">+</button>
+          </div>
+        </div>
+
+        <div class="bp-field">
+          <label for="bp-name">Full Name</label>
+          <input type="text" id="bp-name" name="name" required autocomplete="name">
+        </div>
+
+        <div class="bp-field">
+          <label for="bp-email">Email</label>
+          <input type="email" id="bp-email" name="email" required autocomplete="email">
+        </div>
+
+        <div class="bp-field">
+          <label for="bp-phone">Phone (optional)</label>
+          <input type="tel" id="bp-phone" name="phone" autocomplete="tel">
+        </div>
+
+        <div class="bp-field">
+          <label for="bp-occasion">Occasion or Notes (optional)</label>
+          <textarea id="bp-occasion" name="occasion" placeholder="Family reunion, wedding weekend, corporate retreat…"></textarea>
+        </div>
+
+        <button type="submit" class="bp-submit">Request Availability</button>
+      </form>
+    </div>
+
+    <div id="bpSuccess" class="bp-success">
+      <div class="bp-success-mark">✦</div>
+      <h3>Request Received</h3>
+      <p>Thank you. We'll review your dates and reach out within 24 hours to confirm availability and next steps.</p>
+    </div>
+  </div>
+</div>
+
 <script>
   const nav = document.getElementById('nav');
 
@@ -753,6 +883,67 @@ nav.scrolled .nav-center-logo img { height: 64px; }
   }, { threshold: 0.05 });
 
   document.querySelectorAll('.fade-up, .fade-in, .fade-left, .fade-right').forEach(el => observer.observe(el));
+
+  // Booking panel
+  const bookingPanel   = document.getElementById('bookingPanel');
+  const bookingOverlay = document.getElementById('bookingOverlay');
+
+  function openBooking() {
+    bookingPanel.classList.add('open');
+    bookingOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeBooking() {
+    bookingPanel.classList.remove('open');
+    bookingOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('booking-trigger').addEventListener('click', openBooking);
+  document.querySelectorAll('.booking-open').forEach(el => el.addEventListener('click', openBooking));
+  document.getElementById('bookingClose').addEventListener('click', closeBooking);
+  bookingOverlay.addEventListener('click', closeBooking);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBooking(); });
+
+  // Guests counter
+  let guests = 4;
+  const guestsDisplay = document.getElementById('bp-guests-display');
+  const guestsInput   = document.getElementById('bp-guests-input');
+  document.getElementById('bp-guests-plus').addEventListener('click', () => {
+    if (guests < 22) { guests++; guestsDisplay.textContent = guests; guestsInput.value = guests; }
+  });
+  document.getElementById('bp-guests-minus').addEventListener('click', () => {
+    if (guests > 1) { guests--; guestsDisplay.textContent = guests; guestsInput.value = guests; }
+  });
+
+  // Nights calculator
+  const bpCheckin  = document.getElementById('bp-checkin');
+  const bpCheckout = document.getElementById('bp-checkout');
+  const bpNights   = document.getElementById('bp-nights');
+  const todayStr   = new Date().toISOString().split('T')[0];
+  bpCheckin.min = todayStr;
+  function updateNights() {
+    if (bpCheckin.value && bpCheckout.value) {
+      const diff = (new Date(bpCheckout.value) - new Date(bpCheckin.value)) / 86400000;
+      bpNights.textContent = diff > 0 ? diff + (diff === 1 ? ' night' : ' nights') + ' selected' : '';
+    }
+  }
+  bpCheckin.addEventListener('change', () => { bpCheckout.min = bpCheckin.value; updateNights(); });
+  bpCheckout.addEventListener('change', updateNights);
+
+  // Form submit → Netlify fetch
+  document.getElementById('bookingForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const form = e.target;
+    const data = new URLSearchParams(new FormData(form)).toString();
+    try {
+      await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: data });
+      document.getElementById('bpForm').style.display = 'none';
+      document.getElementById('bpSuccess').style.display = 'block';
+    } catch {
+      alert('Something went wrong. Please email info@thehillard.com directly.');
+    }
+  });
 
   // Spaces tabs
   document.querySelectorAll('.tab-btn').forEach(btn => {
