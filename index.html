@@ -262,12 +262,19 @@ nav.scrolled .nav-center-logo img { height: 64px; }
     .events-banner-content .subheadline { color: rgba(245,239,230,0.72); margin-bottom: 2.5rem; }
 
     /* GALLERY */
-    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 260px; gap: 4px; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1.4fr;
+      grid-template-rows: 420px 270px 270px 420px 280px;
+      gap: 4px;
+    }
     .gallery-cell { overflow: hidden; }
     .gallery-cell img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
-    .gallery-cell:hover img { transform: scale(1.06); }
-    .gallery-cell.tall { grid-row: span 2; }
-    .gallery-cell.wide { grid-column: span 2; }
+    .gallery-cell:hover img { transform: scale(1.04); }
+    @media (max-width: 900px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; grid-auto-rows: 220px; }
+      .gallery-cell { grid-column: auto !important; grid-row: auto !important; }
+    }
 
     /* TESTIMONIAL */
     .testimonial { background: var(--cream-dark); padding: 6rem 3.5rem; text-align: center; }
@@ -647,16 +654,23 @@ nav.scrolled .nav-center-logo img { height: 64px; }
     <h2 class="headline fade-up d1" style="margin-top:1rem;">Life Inside<br><em>The Hillard</em></h2>
   </div>
   <div class="gallery-grid">
-    <div class="gallery-cell tall fade-in"><img src="photos/gal-staircase.jpg" alt="The Grand Staircase" loading="lazy" style="object-position: center 30%;" /></div>
-    <div class="gallery-cell fade-in d1"><img src="photos/gal-sign.jpg" alt="Hillard House circa 1865" loading="lazy" /></div>
-    <div class="gallery-cell fade-in d1"><img src="photos/gal-magnolia.jpg" alt="Spring at The Hillard" loading="lazy" /></div>
-    <div class="gallery-cell fade-in d2"><img src="photos/gal-crimson-sofa.jpg" alt="The Crimson Room" loading="lazy" /></div>
-    <div class="gallery-cell fade-in d2"><img src="photos/gal-dualroom.jpg" alt="The Sitting Rooms" loading="lazy" /></div>
-    <div class="gallery-cell fade-in d3"><img src="photos/gal-library.jpg" alt="The Library" loading="lazy" /></div>
-    <div class="gallery-cell wide fade-in d3"><img src="photos/gal-pool-night.jpg" alt="The Private Pool at Night" loading="lazy" style="object-position: center 40%;" /></div>
-    <div class="gallery-cell fade-in d4"><img src="photos/gal-kitchen-detail.jpg" alt="Chef's Kitchen Detail" loading="lazy" /></div>
-    <div class="gallery-cell fade-in d4"><img src="photos/gal-armchairs.jpg" alt="The Sitting Room" loading="lazy" /></div>
-    <div class="gallery-cell fade-in d4"><img src="photos/spaces-crimson-red.jpg" alt="The Crimson Suite" loading="lazy" style="object-position: center 20%;" /></div>
+    <!-- Row 1 (300px): dual-room wide (c1-2) + staircase (c3) -->
+    <div class="gallery-cell fade-in" style="grid-column:1/3;grid-row:1;"><img src="photos/gal-dualroom.jpg" alt="The Sitting Rooms" loading="lazy" style="object-position:center 32%;" /></div>
+    <div class="gallery-cell fade-in d1" style="grid-column:3;grid-row:1;"><img src="photos/gal-staircase.jpg" alt="The Grand Staircase" loading="lazy" style="object-position:62% 45%;" /></div>
+    <!-- Row 2-3 (270+270=540px): crimson-red(c1) | kitchen-TALL col2(portrait fit) | ext-detail(c3) -->
+    <div class="gallery-cell fade-in d2" style="grid-column:1;grid-row:2;"><img src="photos/gal-dining-set.jpg" alt="The Formal Dining Room" loading="lazy" style="object-position:center 30%;" /></div>
+    <div class="gallery-cell fade-in d2" style="grid-column:2;grid-row:2/4;"><img src="photos/gal-kitchen-detail.jpg" alt="Chef's Kitchen" loading="lazy" style="object-position:center 50%;" /></div>
+    <div class="gallery-cell fade-in d2" style="grid-column:3;grid-row:2;"><img src="photos/gal-exterior-detail.jpg" alt="Historic Detail" loading="lazy" style="object-position:center 45%;" /></div>
+    <!-- Row 3: crimson-sofa(c1) | kitchen cont | magnolia2(c3) -->
+    <div class="gallery-cell fade-in d3" style="grid-column:1;grid-row:3;"><img src="photos/gal-crimson-sofa.jpg" alt="The Crimson Room" loading="lazy" style="object-position:center 42%;" /></div>
+    <div class="gallery-cell fade-in d3" style="grid-column:3;grid-row:3;"><img src="photos/gal-parlor-warm.jpg" alt="The Grand Parlor" loading="lazy" style="object-position:center 40%;" /></div>
+    <!-- Row 4-5 (260+280=540px): pool(c1) | armchairs-TALL col2(portrait fit) | sign(c3) -->
+    <div class="gallery-cell fade-in d4" style="grid-column:1;grid-row:4;"><img src="photos/gal-magnolia2.jpg" alt="Spring at The Hillard" loading="lazy" style="object-position:center 50%;" /></div>
+    <div class="gallery-cell fade-in d4" style="grid-column:2;grid-row:4/6;"><img src="photos/gal-armchairs.jpg" alt="The Sitting Room" loading="lazy" style="object-position:center 48%;" /></div>
+    <div class="gallery-cell fade-in d4" style="grid-column:3;grid-row:4;"><img src="photos/gal-sign.jpg" alt="Hillard House circa 1865" loading="lazy" style="object-position:center 38%;" /></div>
+    <!-- Row 5: library(c1) | armchairs cont | bath-black(c3) -->
+    <div class="gallery-cell fade-in d5" style="grid-column:1;grid-row:5;"><img src="photos/gal-library.jpg" alt="The Library" loading="lazy" style="object-position:center 32%;" /></div>
+    <div class="gallery-cell fade-in d5" style="grid-column:3;grid-row:5;"><img src="photos/gal-piano-ludwig.jpg" alt="The Ludwig Grand Piano" loading="lazy" style="object-position:center 65%;" /></div>
   </div>
 </section>
 
