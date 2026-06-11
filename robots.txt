@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thehillard.com/sitemap.xml
