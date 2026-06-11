@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="photos/hero-v3.webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="photos/hero-s2-roof.webp" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -261,7 +263,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
 
     /* EVENTS BANNER */
     .events-banner { position: relative; height: 560px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .events-banner-bg { position: absolute; inset: 0; background: url('photos/events-exterior.jpg') center 42% / cover no-repeat; }
+    .events-banner-bg { position: absolute; inset: 0; background: url('photos/events-exterior.webp') center 42% / cover no-repeat; }
     .events-banner-overlay { position: absolute; inset: 0; background: rgba(20,28,22,0.58); }
     .events-banner-content { position: relative; text-align: center; color: var(--warm-white); max-width: 700px; padding: 0 2rem; }
     .events-banner-content .label-light { margin-bottom: 1.2rem; display: block; }
@@ -380,6 +382,39 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       .footer-logo { width: 140px; }
       .footer-bottom { flex-direction: column; gap: 0.6rem; text-align: center; }
     }
+    @media (max-width: 480px) {
+      /* Hero */
+      .hero-title { font-size: clamp(2.4rem, 10vw, 3.2rem); }
+      .hero-sub { font-size: .76rem; padding: 0 0.25rem; }
+      .hero-btns { flex-direction: column; align-items: center; gap: 0.8rem; }
+      .hero-btns .btn { width: 100%; max-width: 280px; text-align: center; }
+      /* Global */
+      section { padding: 4rem 1.25rem; }
+      .stats { padding: 3.5rem 1.25rem; }
+      /* Headline */
+      .headline { font-size: clamp(1.8rem, 7.5vw, 2.2rem); }
+      .subheadline { font-size: clamp(1.1rem, 4.5vw, 1.4rem); }
+      /* Stats */
+      .stat-num { font-size: clamp(2.2rem, 10vw, 3rem); }
+      .stats-grid { gap: 2rem 0.5rem; }
+      /* Spaces CTA ghost text */
+      .cta-ghost { font-size: 4.5rem; }
+      .cta-card-top { height: 260px; }
+      /* Events banner */
+      .events-banner { height: auto; min-height: 380px; padding: 4rem 1.5rem; align-items: center; }
+      .events-banner-content { padding: 0; }
+      .events-banner-content .subheadline { font-size: 1.05rem; margin-bottom: 1.8rem; }
+      /* Gallery: single column */
+      .gallery-grid { grid-template-columns: 1fr !important; grid-auto-rows: 260px !important; }
+      .gallery-cell { grid-column: 1 !important; grid-row: auto !important; }
+      /* Tab bar */
+      .tab-btn { font-size: 0.62rem; letter-spacing: 0.08em; padding: 1rem 0.6rem; }
+      /* Reserve */
+      .reserve { padding: 4.5rem 1.25rem; }
+      /* Footer email: stack */
+      .footer-notify-form { flex-direction: column; gap: 0.25rem; }
+      .footer-notify-btn { padding: 0.55rem 0; text-align: left; }
+    }
     @media (prefers-reduced-motion: reduce) {
       .fade-up, .fade-in, .fade-left, .fade-right { opacity: 1 !important; transform: none !important; transition: none !important; }
       .hero-slide { transition: none !important; animation: none !important; }
@@ -468,11 +503,11 @@ nav.scrolled .nav-center-logo img { height: 64px; }
 </nav>
 
 <section class="hero">
-  <div class="hero-slide active" style="background-image:url('photos/hero-v3.jpg')"></div>
-  <div class="hero-slide" style="background-image:url('photos/hero-s2-roof.png');background-position:center top"></div>
-  <div class="hero-slide" style="background-image:url('photos/hero-s3-sign.png')"></div>
-  <div class="hero-slide" style="background-image:url('photos/hero-s4-exterior.jpg')"></div>
-  <div class="hero-slide" style="background-image:url('photos/hero-s5-staircase.jpg')"></div>
+  <div class="hero-slide active" style="background-image:url('photos/hero-v3.webp')"></div>
+  <div class="hero-slide" style="background-image:url('photos/hero-s2-roof.webp');background-position:center top"></div>
+  <div class="hero-slide" style="background-image:url('photos/hero-s3-sign.webp')"></div>
+  <div class="hero-slide" style="background-image:url('photos/hero-s4-exterior.webp')"></div>
+  <div class="hero-slide" style="background-image:url('photos/hero-s5-staircase.webp')"></div>
   <div class="hero-slide" style="background-image:url('photos/hero-s6-piano.jpg')"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -531,7 +566,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
 <section id="about">
   <div class="section-inner about-grid">
     <div class="about-img fade-left">
-      <img src="photos/about-new.jpg" alt="Interior of The Hillard" loading="lazy" />
+      <img src="photos/about-new.webp" alt="Interior of The Hillard" loading="lazy" />
     </div>
     <div class="about-text-col fade-right">
       <span class="label">About the Estate</span>
@@ -583,7 +618,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       </div>
     </div>
     <div class="space-card fade-up d1">
-      <div class="space-card-img"><img src="photos/spaces-dining.jpg" alt="The Formal Dining Room" loading="lazy" /></div>
+      <div class="space-card-img"><img src="photos/spaces-dining.webp" alt="The Formal Dining Room" loading="lazy" /></div>
       <div class="space-card-body">
         <span class="space-card-eyebrow">Main Floor</span>
         <h3 class="space-card-title">The Formal Dining Room</h3>
@@ -591,7 +626,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       </div>
     </div>
     <div class="space-card fade-up d2">
-      <div class="space-card-img"><img src="photos/spaces-kitchen-wide.jpg" alt="The Chef's Kitchen" loading="lazy" /></div>
+      <div class="space-card-img"><img src="photos/spaces-kitchen-wide.webp" alt="The Chef's Kitchen" loading="lazy" /></div>
       <div class="space-card-body">
         <span class="space-card-eyebrow">Main Floor</span>
         <h3 class="space-card-title">The Chef's Kitchen</h3>
@@ -599,7 +634,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       </div>
     </div>
     <div class="space-card fade-up d3">
-      <div class="space-card-img"><img src="photos/spaces-staircase.jpg" alt="The Grand Staircase" loading="lazy" /></div>
+      <div class="space-card-img"><img src="photos/spaces-staircase.webp" alt="The Grand Staircase" loading="lazy" /></div>
       <div class="space-card-body">
         <span class="space-card-eyebrow">Throughout the House</span>
         <h3 class="space-card-title">The Grand Staircase</h3>
@@ -628,7 +663,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
 <div class="tab-pane" id="tab-bedrooms">
   <div class="spaces-grid">
     <div class="space-card fade-up">
-      <div class="space-card-img"><img src="photos/spaces-heritage.jpg" alt="The Heritage Suite" loading="lazy" /></div>
+      <div class="space-card-img"><img src="photos/spaces-heritage.webp" alt="The Heritage Suite" loading="lazy" /></div>
       <div class="space-card-body">
         <span class="space-card-eyebrow">Upper Floor — Primary Suite</span>
         <h3 class="space-card-title">The Heritage Suite</h3>
@@ -636,7 +671,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       </div>
     </div>
     <div class="space-card fade-up d1">
-      <div class="space-card-img"><img src="photos/spaces-roseroom.jpg" alt="The Rose Room" loading="lazy" /></div>
+      <div class="space-card-img"><img src="photos/spaces-roseroom.webp" alt="The Rose Room" loading="lazy" /></div>
       <div class="space-card-body">
         <span class="space-card-eyebrow">Upper Floor</span>
         <h3 class="space-card-title">The Rose Room</h3>
@@ -644,7 +679,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       </div>
     </div>
     <div class="space-card fade-up d2">
-      <div class="space-card-img"><img src="photos/spaces-crimson-bed.jpg" alt="The Crimson Suite" loading="lazy" style="object-position:center 30%;" /></div>
+      <div class="space-card-img"><img src="photos/spaces-crimson-bed.webp" alt="The Crimson Suite" loading="lazy" style="object-position:center 30%;" /></div>
       <div class="space-card-body">
         <span class="space-card-eyebrow">First Floor</span>
         <h3 class="space-card-title">The Crimson Suite</h3>
@@ -652,7 +687,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       </div>
     </div>
     <div class="space-card fade-up d3">
-      <div class="space-card-img"><img src="photos/spaces-library.jpg" alt="The Library Room" loading="lazy" /></div>
+      <div class="space-card-img"><img src="photos/spaces-library.webp" alt="The Library Room" loading="lazy" /></div>
       <div class="space-card-body">
         <span class="space-card-eyebrow">Upper Floor</span>
         <h3 class="space-card-title">The Library Room</h3>
@@ -660,7 +695,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       </div>
     </div>
     <div class="space-card fade-up d4">
-      <div class="space-card-img"><img src="photos/spaces-bunkroom.jpg" alt="The Family Room" loading="lazy" /></div>
+      <div class="space-card-img"><img src="photos/spaces-bunkroom.webp" alt="The Family Room" loading="lazy" /></div>
       <div class="space-card-body">
         <span class="space-card-eyebrow">Upper Floor</span>
         <h3 class="space-card-title">The Family Room</h3>
@@ -668,7 +703,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       </div>
     </div>
     <div class="space-card fade-up d5">
-      <div class="space-card-img"><img src="photos/spaces-room4.jpg" alt="Double Guest Room" loading="lazy" /></div>
+      <div class="space-card-img"><img src="photos/spaces-room4.webp" alt="Double Guest Room" loading="lazy" /></div>
       <div class="space-card-body">
         <span class="space-card-eyebrow">Upper Floor</span>
         <h3 class="space-card-title">The Double Room</h3>
@@ -676,7 +711,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       </div>
     </div>
     <div class="space-card fade-up">
-      <div class="space-card-img"><img src="photos/spaces-room5.jpg" alt="Room 5" loading="lazy" /></div>
+      <div class="space-card-img"><img src="photos/spaces-room5.webp" alt="Room 5" loading="lazy" /></div>
       <div class="space-card-body">
         <span class="space-card-eyebrow">Third Floor</span>
         <h3 class="space-card-title">The Arched Room</h3>
@@ -684,7 +719,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       </div>
     </div>
     <div class="space-card fade-up d1">
-      <div class="space-card-img"><img src="photos/spaces-room6.jpg" alt="Room 6" loading="lazy" /></div>
+      <div class="space-card-img"><img src="photos/spaces-room6.webp" alt="Room 6" loading="lazy" /></div>
       <div class="space-card-body">
         <span class="space-card-eyebrow">Upper Floor</span>
         <h3 class="space-card-title">The Garden Room</h3>
@@ -692,7 +727,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       </div>
     </div>
     <div class="space-card fade-up d2">
-      <div class="space-card-img"><img src="photos/spaces-room7.jpg" alt="Room 7" loading="lazy" /></div>
+      <div class="space-card-img"><img src="photos/spaces-room7.webp" alt="Room 7" loading="lazy" /></div>
       <div class="space-card-body">
         <span class="space-card-eyebrow">Upper Floor</span>
         <h3 class="space-card-title">The White Room</h3>
@@ -700,7 +735,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       </div>
     </div>
     <div class="space-card fade-up d3">
-      <div class="space-card-img"><img src="photos/spaces-room8.jpg" alt="Room 8" loading="lazy" /></div>
+      <div class="space-card-img"><img src="photos/spaces-room8.webp" alt="Room 8" loading="lazy" /></div>
       <div class="space-card-body">
         <span class="space-card-eyebrow">Second Floor</span>
         <h3 class="space-card-title">The Iron Beds Room</h3>
@@ -725,7 +760,7 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       </div>
     </div>
     <div class="space-card fade-up d5">
-      <div class="space-card-img"><img src="photos/spaces-room9.jpg" alt="Room 9" loading="lazy" /></div>
+      <div class="space-card-img"><img src="photos/spaces-room9.webp" alt="Room 9" loading="lazy" /></div>
       <div class="space-card-body">
         <span class="space-card-eyebrow">Upper Floor — En-Suite</span>
         <h3 class="space-card-title">The Green Bath Suite</h3>
@@ -770,22 +805,22 @@ nav.scrolled .nav-center-logo img { height: 64px; }
   </div>
   <div class="gallery-grid">
     <!-- Row 1 (300px): dual-room wide (c1-2) + staircase (c3) -->
-    <div class="gallery-cell fade-in" style="grid-column:1/3;grid-row:1;"><img src="photos/gal-dualroom.jpg" alt="The Sitting Rooms" loading="lazy" style="object-position:center 32%;" /></div>
+    <div class="gallery-cell fade-in" style="grid-column:1/3;grid-row:1;"><img src="photos/gal-dualroom.webp" alt="The Sitting Rooms" loading="lazy" style="object-position:center 32%;" /></div>
     <div class="gallery-cell fade-in d1" style="grid-column:3;grid-row:1;"><img src="photos/gal-staircase.jpg" alt="The Grand Staircase" loading="lazy" style="object-position:62% 45%;" /></div>
     <!-- Row 2-3 (270+270=540px): crimson-red(c1) | kitchen-TALL col2(portrait fit) | ext-detail(c3) -->
-    <div class="gallery-cell fade-in d2" style="grid-column:1;grid-row:2;"><img src="photos/gal-dining-set.jpg" alt="The Formal Dining Room" loading="lazy" style="object-position:center 30%;" /></div>
-    <div class="gallery-cell fade-in d2" style="grid-column:2;grid-row:2/4;"><img src="photos/gal-kitchen-detail.jpg" alt="Chef's Kitchen" loading="lazy" style="object-position:center 50%;" /></div>
-    <div class="gallery-cell fade-in d2" style="grid-column:3;grid-row:2;"><img src="photos/gal-exterior-detail.jpg" alt="Historic Detail" loading="lazy" style="object-position:center 45%;" /></div>
+    <div class="gallery-cell fade-in d2" style="grid-column:1;grid-row:2;"><img src="photos/gal-dining-set.webp" alt="The Formal Dining Room" loading="lazy" style="object-position:center 30%;" /></div>
+    <div class="gallery-cell fade-in d2" style="grid-column:2;grid-row:2/4;"><img src="photos/gal-kitchen-detail.webp" alt="Chef's Kitchen" loading="lazy" style="object-position:center 50%;" /></div>
+    <div class="gallery-cell fade-in d2" style="grid-column:3;grid-row:2;"><img src="photos/gal-exterior-detail.webp" alt="Historic Detail" loading="lazy" style="object-position:center 45%;" /></div>
     <!-- Row 3: crimson-sofa(c1) | kitchen cont | magnolia2(c3) -->
-    <div class="gallery-cell fade-in d3" style="grid-column:1;grid-row:3;"><img src="photos/gal-crimson-sofa.jpg" alt="The Crimson Room" loading="lazy" style="object-position:center 42%;" /></div>
+    <div class="gallery-cell fade-in d3" style="grid-column:1;grid-row:3;"><img src="photos/gal-crimson-sofa.webp" alt="The Crimson Room" loading="lazy" style="object-position:center 42%;" /></div>
     <div class="gallery-cell fade-in d3" style="grid-column:3;grid-row:3;"><img src="photos/gal-parlor-warm.jpg" alt="The Grand Parlor" loading="lazy" style="object-position:center 40%;" /></div>
     <!-- Row 4-5 (260+280=540px): pool(c1) | armchairs-TALL col2(portrait fit) | sign(c3) -->
-    <div class="gallery-cell fade-in d4" style="grid-column:1;grid-row:4;"><img src="photos/gal-magnolia2.jpg" alt="Spring at The Hillard" loading="lazy" style="object-position:center 50%;" /></div>
-    <div class="gallery-cell fade-in d4" style="grid-column:2;grid-row:4/6;"><img src="photos/gal-armchairs.jpg" alt="The Sitting Room" loading="lazy" style="object-position:center 48%;" /></div>
-    <div class="gallery-cell fade-in d4" style="grid-column:3;grid-row:4;"><img src="photos/gal-sign.jpg" alt="Hillard House circa 1865" loading="lazy" style="object-position:center 38%;" /></div>
+    <div class="gallery-cell fade-in d4" style="grid-column:1;grid-row:4;"><img src="photos/gal-magnolia.webp" alt="Spring at The Hillard" loading="lazy" style="object-position:center 50%;" /></div>
+    <div class="gallery-cell fade-in d4" style="grid-column:2;grid-row:4/6;"><img src="photos/gal-armchairs.webp" alt="The Sitting Room" loading="lazy" style="object-position:center 48%;" /></div>
+    <div class="gallery-cell fade-in d4" style="grid-column:3;grid-row:4;"><img src="photos/gal-sign.webp" alt="Hillard House circa 1865" loading="lazy" style="object-position:center 38%;" /></div>
     <!-- Row 5: library(c1) | armchairs cont | bath-black(c3) -->
-    <div class="gallery-cell fade-in d5" style="grid-column:1;grid-row:5;"><img src="photos/gal-library.jpg" alt="The Library" loading="lazy" style="object-position:center 32%;" /></div>
-    <div class="gallery-cell fade-in d5" style="grid-column:3;grid-row:5;"><img src="photos/gal-piano-ludwig.jpg" alt="The Ludwig Grand Piano" loading="lazy" style="object-position:center 65%;" /></div>
+    <div class="gallery-cell fade-in d5" style="grid-column:1;grid-row:5;"><img src="photos/gal-library.webp" alt="The Library" loading="lazy" style="object-position:center 32%;" /></div>
+    <div class="gallery-cell fade-in d5" style="grid-column:3;grid-row:5;"><img src="photos/gal-piano-ludwig.webp" alt="The Ludwig Grand Piano" loading="lazy" style="object-position:center 65%;" /></div>
   </div>
 </section>
 
