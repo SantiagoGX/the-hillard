@@ -489,25 +489,6 @@ nav.scrolled .nav-center-logo img { height: 64px; }
       .hero-slide { transition: none !important; animation: none !important; }
       .hero-scroll-line { animation: none !important; opacity: 0.5; }
     }
-    /* FAQ */
-    .faq-section { background: var(--cream); padding: 7rem 3.5rem; text-align: center; }
-    .faq-list { text-align: left; margin-top: 0; }
-    .faq-item { border-bottom: 1px solid rgba(28,37,53,.1); }
-    .faq-q {
-      width: 100%; background: none; border: none; padding: 1.4rem 0;
-      font-family: var(--serif); font-size: 1.15rem; font-weight: 400;
-      color: var(--charcoal); text-align: left; cursor: pointer;
-      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
-      transition: color .25s;
-    }
-    .faq-q:hover { color: var(--gold); }
-    .faq-q::after { content: '+'; font-family: var(--sans); font-size: 1.2rem; font-weight: 300; color: var(--gold); flex-shrink: 0; transition: transform .3s ease; }
-    .faq-q[aria-expanded="true"]::after { transform: rotate(45deg); }
-    .faq-a { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease; }
-    .faq-a.open { max-height: 200px; padding-bottom: 1.2rem; }
-    .faq-a p { font-size: .88rem; line-height: 1.9; color: var(--text-body); }
-    @media (max-width: 900px) { .faq-section { padding: 5rem 1.5rem; } }
-    @media (max-width: 480px) { .faq-section { padding: 4rem 1.25rem; } .faq-q { font-size: 1rem; } }
 
     /* BOOKING PANEL */
     .booking-overlay {
@@ -930,23 +911,6 @@ nav.scrolled .nav-center-logo img { height: 64px; }
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="faq-section" id="faq" aria-label="Frequently Asked Questions">
-  <div class="section-inner" style="max-width:760px;">
-    <span class="label" style="display:block;margin-bottom:1.2rem;">Questions</span>
-    <h2 class="headline fade-up" style="margin-bottom:3rem;">Everything You<br><em>Need to Know</em></h2>
-    <div class="faq-list">
-      <div class="faq-item fade-up"><button class="faq-q" aria-expanded="false">Can I book individual rooms?</button><div class="faq-a"><p>No. The Hillard is available for exclusive whole-house bookings only. When you reserve, the entire mansion is yours — 9 bedrooms, every fireplace, every room. No other guests, no shared spaces.</p></div></div>
-      <div class="faq-item fade-up d1"><button class="faq-q" aria-expanded="false">How many guests can The Hillard accommodate?</button><div class="faq-a"><p>Up to 22 guests across 9 bedrooms. The formal dining room seats 16 and the grand parlor comfortably hosts larger gatherings.</p></div></div>
-      <div class="faq-item fade-up d2"><button class="faq-q" aria-expanded="false">Is The Hillard kosher-friendly?</button><div class="faq-a"><p>Yes. The kitchen is kosher-capable and can be prepared for kosher use prior to your arrival. The Hillard is also a 5-minute walk from the Orthodox Synagogue of Wilkes-Barre.</p></div></div>
-      <div class="faq-item fade-up d2"><button class="faq-q" aria-expanded="false">How far is The Hillard from New York City and Philadelphia?</button><div class="faq-a"><p>Approximately 2.5 hours from New York City via I-80 W, and approximately 2 hours from Philadelphia. The Hillard sits in the heart of the Pocono Mountains region.</p></div></div>
-      <div class="faq-item fade-up d3"><button class="faq-q" aria-expanded="false">Can The Hillard host a wedding or private event?</button><div class="faq-a"><p>Absolutely. The grand parlor, formal dining room, and grounds are available for ceremonies, receptions, rehearsal dinners, corporate retreats, and milestone celebrations. Contact us to discuss your event.</p></div></div>
-      <div class="faq-item fade-up d3"><button class="faq-q" aria-expanded="false">What is the minimum stay?</button><div class="faq-a"><p>The minimum stay is 3 nights. For peak weekends and holidays, longer minimums may apply.</p></div></div>
-      <div class="faq-item fade-up d4"><button class="faq-q" aria-expanded="false">What amenities are included?</button><div class="faq-a"><p>The Hillard includes a private pool, Ludwig concert grand piano, 8 wood-burning fireplaces, chef's kitchen, formal dining room, library, grand staircase, and original Victorian millwork throughout. All bedrooms have private or en-suite bathrooms.</p></div></div>
-      <div class="faq-item fade-up d4"><button class="faq-q" aria-expanded="false">What are the check-in and check-out times?</button><div class="faq-a"><p>Check-in is at 3:00 PM and check-out is at 11:00 AM. Early check-in or late check-out may be available upon request.</p></div></div>
-    </div>
-  </div>
-</section>
 
 <script type="application/ld+json">
 {
@@ -1223,21 +1187,6 @@ nav.scrolled .nav-center-logo img { height: 64px; }
         el.classList.remove('visible');
         setTimeout(() => el.classList.add('visible'), 60);
       });
-    });
-  });
-
-  // FAQ accordion
-  document.querySelectorAll('.faq-q').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var expanded = this.getAttribute('aria-expanded') === 'true';
-      document.querySelectorAll('.faq-q').forEach(function(b) {
-        b.setAttribute('aria-expanded', 'false');
-        b.nextElementSibling.classList.remove('open');
-      });
-      if (!expanded) {
-        this.setAttribute('aria-expanded', 'true');
-        this.nextElementSibling.classList.add('open');
-      }
     });
   });
 
