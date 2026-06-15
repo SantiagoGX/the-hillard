@@ -1310,6 +1310,9 @@ nav.scrolled .nav-center-logo img { height: 42px; }
         el.classList.remove('visible');
         setTimeout(() => el.classList.add('visible'), 60);
       });
+      const tabBar = document.querySelector('.spaces-tab-bar');
+      const tabBarBottom = tabBar.getBoundingClientRect().bottom + window.scrollY;
+      window.scrollTo({ top: tabBarBottom, behavior: 'smooth' });
     });
   });
 
