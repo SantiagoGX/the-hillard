@@ -310,8 +310,12 @@ nav.scrolled .nav-center-logo img { height: 42px; }
       transition: border-color 0.3s, color 0.3s;
     }
     .cta-reserve-link:hover { border-color: var(--gold); color: rgba(196,162,101,0.9); }
+    /* MOBILE BOOKING BUTTON */
+    .nav-book-btn { display: none; align-items: center; gap: 0.5rem; background: none; border: 1px solid rgba(253,250,244,0.45); color: var(--warm-white); font-family: var(--sans); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.5rem 0.9rem; cursor: pointer; transition: border-color 0.25s, background 0.25s; }
+    .nav-book-btn:hover { border-color: rgba(253,250,244,0.85); background: rgba(253,250,244,0.08); }
+    .nav-book-btn svg { flex-shrink: 0; }
     /* SPACES TABS */
-    .spaces-tab-bar { display: flex; border-bottom: 1px solid rgba(28,37,53,.1); position: sticky; top: 96px; z-index: 50; background: var(--cream); box-shadow: 0 2px 16px rgba(0,0,0,0.05); }
+    .spaces-tab-bar { display: flex; border-bottom: 1px solid rgba(28,37,53,.1); position: sticky; top: 94px; z-index: 50; background: var(--cream); box-shadow: 0 2px 16px rgba(0,0,0,0.05); }
     .tab-btn { flex: 1; font-family: var(--sans); font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; color: var(--text-muted); background: none; border: none; border-bottom: 2px solid transparent; padding: 1.4rem 2rem 1.25rem; cursor: pointer; margin-bottom: -1px; transition: color .3s, border-color .3s, background .3s; text-align: center; }
     .tab-btn:hover { color: var(--charcoal); background: rgba(28,37,53,.03); }
     .tab-btn.active { color: var(--charcoal); border-bottom-color: var(--gold); background: rgba(196,162,101,.04); }
@@ -442,24 +446,25 @@ nav.scrolled .nav-center-logo img { height: 42px; }
 
     /* MOBILE */
     @media (max-width: 900px) {
-      nav { padding: 0.4rem 1.5rem; }
-      nav.scrolled { padding: 0.4rem 1.5rem; }
+      nav { padding: 0.85rem 1.5rem; }
+      nav.scrolled { padding: 0.85rem 1.5rem; }
       .nav-left .nav-links { display: none; }
       .nav-right .nav-links { display: none; }
       .nav-cta { display: none; }
-      .nav-burger { display: flex; }
-      .nav-center-logo img { height: 42px; }
-      nav.scrolled .nav-center-logo img { height: 32px; }
-      .nav-wordmark { font-size: 0.72rem; letter-spacing: 0.18em; }
+      .nav-center-logo { display: none; }
+      .nav-burger { display: none; }
+      .nav-book-btn { display: flex; }
+      .nav-wordmark { font-size: 0.78rem; letter-spacing: 0.2em; }
       .hero { height: auto; min-height: 100dvh; }
       section { padding: 5rem 1.5rem; } .stats { padding: 4rem 1.5rem; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; } .about-text-col { padding-right: 0; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .spaces-tab-bar { top: 64px; }
+      .spaces-tab-bar { top: 62px; }
       .tab-btn { padding: 1.2rem 1rem 1.1rem; font-size: 0.7rem; letter-spacing: 0.15em; }
       .spaces-header { padding: 0 1.5rem; }
       .spaces-grid { grid-template-columns: 1fr; } .space-card-img { height: 260px; }
       .cta-card-top { height: 320px; } .cta-ghost { font-size: 7rem; }
+      .space-card--cta { display: none; }
       .spaces-more { padding: 2rem 1.5rem; }
       .amenities-grid { grid-template-columns: 1fr; gap: 2rem; }
       .events-banner { height: 420px; }
@@ -605,6 +610,10 @@ nav.scrolled .nav-center-logo img { height: 42px; }
     </ul>
     <button type="button" id="booking-trigger" class="nav-cta">Inquire &amp; Reserve</button>
     <button type="button" id="nav-burger" class="nav-burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <button type="button" id="nav-book-mobile" class="nav-book-btn booking-open" aria-label="Reserve">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Reserve
+    </button>
   </div>
 </nav>
 
@@ -1119,9 +1128,16 @@ nav.scrolled .nav-center-logo img { height: 42px; }
 <script>
   const nav = document.getElementById('nav');
 
+  const tabBar = document.querySelector('.spaces-tab-bar');
+  function updateTabSticky() {
+    if (tabBar) tabBar.style.top = nav.getBoundingClientRect().height + 'px';
+  }
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
+    updateTabSticky();
   });
+  window.addEventListener('resize', updateTabSticky);
+  updateTabSticky();
 
   window.addEventListener('load', () => {
     document.querySelectorAll('.hero-content .fade-up, .hero-content .fade-in').forEach(el => {
