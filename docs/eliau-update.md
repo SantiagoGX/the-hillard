@@ -1,359 +1,359 @@
-# The Hillard — Guía de Operación para Eliau
-*Preparado por Santi (@SantiagoGX) · Junio 2026*
+# The Hillard — Operations Guide for Eliau
+*Prepared by Santi (@SantiagoGX) · June 2026*
 
 ---
 
-Este documento es tu referencia completa para operar el sitio y el sistema de reservas de The Hillard de forma independiente. Cubre qué tienes, cómo funciona cada pieza, y qué pasos quedan pendientes para llegar al 100%.
+This document is your complete reference for operating The Hillard's website and booking system independently. It covers what you have, how each piece works, and what steps remain to reach 100%.
 
 ---
 
-## Índice
+## Table of Contents
 
-1. [Conectar el dominio thehillard.com](#1-conectar-el-dominio-thehillardcom)
-2. [Cómo funciona el sistema de reservas](#2-cómo-funciona-el-sistema-de-reservas)
-3. [Recibir notificaciones en dreamriverventures@gmail.com](#3-recibir-notificaciones-en-dreamriverventuresgmailcom)
-4. [Mejora propuesta: email de aprobación con botón](#4-mejora-propuesta-email-de-aprobación-con-botón)
-5. [Conectar Stripe](#5-conectar-stripe)
-6. [Cuenta de Make — acceso y control](#6-cuenta-de-make--acceso-y-control)
-7. [Contacto técnico](#7-contacto-técnico)
+1. [Connect the thehillard.com domain](#1-connect-the-thehillardcom-domain)
+2. [How the booking system works](#2-how-the-booking-system-works)
+3. [Receive notifications at dreamriverventures@gmail.com](#3-receive-notifications-at-dreamriverventuresgmailcom)
+4. [Proposed improvement: approval email with button](#4-proposed-improvement-approval-email-with-button)
+5. [Connect Stripe](#5-connect-stripe)
+6. [Make account — access and control](#6-make-account--access-and-control)
+7. [Technical contact](#7-technical-contact)
 
 ---
 
-## 1. Conectar el dominio thehillard.com
+## 1. Connect the thehillard.com domain
 
-El sitio ya está live en:
+The site is already live at:
 
 ```
 https://the-hillard.pages.dev
 ```
 
-El dominio final `thehillard.com` todavía no está conectado — ese es el único paso que falta para que el sitio sea público con tu dominio definitivo.
+The final domain `thehillard.com` is not yet connected — that is the only remaining step to make the site public under your permanent domain.
 
-### Opción A — Si el dominio está en Cloudflare (más simple)
+### Option A — If the domain is on Cloudflare (simpler)
 
-Si compraste `thehillard.com` en Cloudflare, la conexión es casi automática:
+If you purchased `thehillard.com` through Cloudflare, the connection is nearly automatic:
 
-1. Entra a [dash.cloudflare.com](https://dash.cloudflare.com) con `dreamriverventures@gmail.com`
-2. En el panel izquierdo, ve a **Workers & Pages**
-3. Haz clic en el proyecto **the-hillard**
-4. Ve a la pestaña **Custom Domains**
-5. Haz clic en **Set up a custom domain**
-6. Escribe `thehillard.com` y sigue los pasos — Cloudflare configura todo automáticamente
+1. Go to [dash.cloudflare.com](https://dash.cloudflare.com) with `dreamriverventures@gmail.com`
+2. In the left panel, go to **Workers & Pages**
+3. Click the **the-hillard** project
+4. Go to the **Custom Domains** tab
+5. Click **Set up a custom domain**
+6. Type `thehillard.com` and follow the steps — Cloudflare configures everything automatically
 
-### Opción B — Si el dominio está en otro registrador (GoDaddy, Namecheap, Google Domains, etc.)
+### Option B — If the domain is at another registrar (GoDaddy, Namecheap, Google Domains, etc.)
 
-Tienes dos sub-opciones:
+You have two sub-options:
 
-**Sub-opción B1: Agregar un registro CNAME en tu registrador**
+**Sub-option B1: Add a CNAME record at your registrar**
 
-1. Entra al panel de tu registrador (donde compraste el dominio)
-2. Ve a **DNS Management** o **DNS Settings**
-3. Agrega un registro CNAME con estos valores:
+1. Log in to your registrar's panel (where you purchased the domain)
+2. Go to **DNS Management** or **DNS Settings**
+3. Add a CNAME record with these values:
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
 | Type | `CNAME` |
-| Name / Host | `@` (o el dominio raíz, según cómo lo indique tu registrador) |
+| Name / Host | `@` (or the root domain, as indicated by your registrar) |
 | Target / Value | `the-hillard.pages.dev` |
-| TTL | Automático o 300 |
+| TTL | Automatic or 300 |
 
-4. Guarda el cambio
-5. Luego, en Cloudflare (dash.cloudflare.com → Workers & Pages → the-hillard → Custom Domains), agrega `thehillard.com` para que Cloudflare reconozca y active el dominio
+4. Save the change
+5. Then, in Cloudflare (dash.cloudflare.com → Workers & Pages → the-hillard → Custom Domains), add `thehillard.com` so Cloudflare recognizes and activates the domain
 
-> Nota: los cambios DNS pueden tardar entre 5 minutos y 48 horas en propagarse completamente. Lo normal es menos de 1 hora.
+> Note: DNS changes can take anywhere from 5 minutes to 48 hours to fully propagate. Typically it's under 1 hour.
 
-**Sub-opción B2: Transferir los nameservers a Cloudflare**
+**Sub-option B2: Transfer nameservers to Cloudflare**
 
-Esta opción da más control y es más robusta a largo plazo. En tu registrador, cambia los nameservers del dominio a los de Cloudflare (Cloudflare los muestra cuando agregas el dominio a tu cuenta). Una vez apuntados a Cloudflare, la conexión con Pages es automática.
+This option gives more control and is more robust long-term. At your registrar, change the domain's nameservers to Cloudflare's (Cloudflare shows these when you add the domain to your account). Once pointing to Cloudflare, the connection with Pages is automatic.
 
 ---
 
-## 2. Cómo funciona el sistema de reservas
+## 2. How the booking system works
 
-El sistema está diseñado para propiedades de alto valor como The Hillard. Aquí está el flujo completo:
+The system is designed for high-value properties like The Hillard. Here is the complete flow:
 
-### Flujo paso a paso
+### Step-by-step flow
 
 ```
-Huésped llena el formulario
+Guest fills out the form
         ↓
-Make recibe los datos al instante
+Make receives the data instantly
         ↓
-Make consulta el calendario de Guesty en tiempo real
+Make checks the Guesty calendar in real time
         ↓
-¿Fechas disponibles?
+Are the dates available?
     ↙              ↘
-  SÍ                 NO
+  YES                NO
   ↓                   ↓
-Tú recibes         Tú recibes
+You receive        You receive
 email ✅            email ⚠️
 AVAILABLE          CONFLICT
         ↓
-Tú evalúas el perfil del huésped
+You evaluate the guest's profile
         ↓
-Si aceptas: creas un Stripe Payment Link
+If you accept: you create a Stripe Payment Link
         ↓
-Huésped paga
+Guest pays
         ↓
-Confirmas la reserva en Guesty
+You confirm the booking in Guesty
         ↓
-Mensajes automáticos al huésped se activan
+Automated messages to the guest are triggered
 ```
 
-### El formulario de reserva
+### The booking form
 
-El huésped llena desde el sitio:
-- Fechas de check-in y check-out (con calendario interactivo — las fechas ya ocupadas en Guesty aparecen bloqueadas automáticamente)
-- Número de huéspedes
-- Nombre completo
+The guest fills out from the site:
+- Check-in and check-out dates (with an interactive calendar — dates already booked in Guesty appear blocked automatically)
+- Number of guests
+- Full name
 - Email
-- Teléfono
-- Ocasión o tipo de evento
+- Phone
+- Occasion or event type
 
-### Los emails que recibes
+### The emails you receive
 
-**Cuando hay disponibilidad:**
+**When dates are available:**
 
 ```
 ✅ AVAILABLE
 
-Nombre: John Smith
+Name: John Smith
 Email: john@email.com
-Teléfono: +1 (555) 123-4567
+Phone: +1 (555) 123-4567
 Check-in: 2026-11-15
 Check-out: 2026-11-18
-Huéspedes: 8
-Ocasión: Cumpleaños familiar
+Guests: 8
+Occasion: Family birthday
 ```
 
-**Cuando hay conflicto:**
+**When there is a conflict:**
 
 ```
 ⚠️ CONFLICT
 
-Las fechas solicitadas (Nov 15–18) se solapan con una reserva existente en Guesty.
+The requested dates (Nov 15–18) overlap with an existing booking in Guesty.
 ```
 
-### Por qué el paso manual de aprobación es correcto para una propiedad como esta
+### Why the manual approval step is right for a property like this
 
-El "Instant Booking" automático (aceptar y cobrar sin revisar al huésped) es el estándar para propiedades de bajo costo con muchas reseñas. Para The Hillard — una mansión exclusiva de $5,000–$15,000+ por estadía — el flujo manual es una **ventaja**, no una limitación.
+Automatic "Instant Booking" (accepting and charging without reviewing the guest) is the standard for low-cost properties with many reviews. For The Hillard — an exclusive mansion at $5,000–$15,000+ per stay — the manual flow is an **advantage**, not a limitation.
 
-Razones concretas:
+Concrete reasons:
 
-| Beneficio | Explicación |
+| Benefit | Explanation |
 |---|---|
-| **Control del tipo de evento** | Puedes declinar eventos que no quieres en la propiedad (fiestas de graduación, despedidas de soltero sin supervisión, etc.) |
-| **Evaluación del perfil del huésped** | Puedes revisar quién es antes de comprometerte |
-| **Precio flexible** | Puedes ajustar el monto según el evento o la temporada antes de enviar el link de pago |
-| **Protección de la propiedad** | Una mansión de 1865 con antigüedades y acabados originales merece vetting de sus huéspedes |
-| **Posicionamiento** | Las propiedades de lujo exclusivo no hacen "instant booking" — el proceso selectivo es parte de la experiencia premium |
+| **Event type control** | You can decline events you don't want at the property (graduation parties, unsupervised bachelor parties, etc.) |
+| **Guest profile evaluation** | You can review who they are before committing |
+| **Flexible pricing** | You can adjust the amount based on the event or season before sending the payment link |
+| **Property protection** | An 1865 mansion with antiques and original finishes deserves guest vetting |
+| **Positioning** | Exclusive luxury properties do not do "instant booking" — the selective process is part of the premium experience |
 
-Cuando tengas decenas de reseñas y el perfil de la propiedad esté bien establecido en plataformas, podrás activar Instant Booking en canales específicos si lo deseas. Por ahora, el paso de aprobación manual es exactamente lo correcto.
+When you have dozens of reviews and the property's profile is well established on platforms, you can enable Instant Booking on specific channels if you wish. For now, the manual approval step is exactly right.
 
 ---
 
-## 3. Recibir notificaciones en dreamriverventures@gmail.com
+## 3. Receive notifications at dreamriverventures@gmail.com
 
-Actualmente, todas las notificaciones del formulario de reserva llegan solo a:
+Currently, all booking form notifications are sent only to:
 
 ```
 delevilleofficial@gmail.com
 ```
 
-Para recibir también en `dreamriverventures@gmail.com`, hay que agregar esa dirección como CC en el módulo de email de Make.
+To also receive them at `dreamriverventures@gmail.com`, that address needs to be added as CC in the Make email module.
 
-### Cómo hacerlo
+### How to do it
 
-1. Entra a [make.com](https://make.com) con `delevilleofficial@gmail.com`
-2. Abre el escenario de reservas (el que procesa los formularios del sitio)
-3. Busca el módulo de **Send Email** (el que envía la notificación de AVAILABLE o CONFLICT)
-4. En el campo **CC**, agrega:
+1. Go to [make.com](https://make.com) with `delevilleofficial@gmail.com`
+2. Open the bookings scenario (the one that processes forms from the site)
+3. Find the **Send Email** module (the one that sends the AVAILABLE or CONFLICT notification)
+4. In the **CC** field, add:
 
 ```
 dreamriverventures@gmail.com
 ```
 
-5. Guarda el escenario
+5. Save the scenario
 
-**Alternativa:** Agregar un segundo módulo "Send Email" que envíe una copia idéntica a `dreamriverventures@gmail.com`. Esto es útil si quieres un asunto o formato ligeramente diferente para cada bandeja.
+**Alternative:** Add a second "Send Email" module that sends an identical copy to `dreamriverventures@gmail.com`. This is useful if you want a slightly different subject line or format for each inbox.
 
-> Claude Cowork puede hacer este cambio completamente. Solo necesita que Make esté abierto en su navegador. Inicia sesión en make.com con `delevilleofficial@gmail.com` y luego abre Make en la sesión de Claude Cowork.
-
----
-
-## 4. Mejora propuesta: email de aprobación con botón
-
-Esta es la siguiente mejora de alta prioridad para el sistema de reservas. Elimina el paso manual de Stripe.
-
-### Flujo actual (con fricción)
-
-```
-Recibes email AVAILABLE
-        ↓
-Abres Stripe manualmente
-        ↓
-Creas un Payment Link por el monto correcto
-        ↓
-Copias el link
-        ↓
-Abres tu email
-        ↓
-Redactas el email al huésped
-        ↓
-Pegas el link y envías
-```
-
-Eso son **6–8 pasos manuales** para cada reserva que aceptas.
-
-### Flujo propuesto (un solo clic)
-
-```
-Recibes email AVAILABLE con botón:
-[ ✅ Enviar link de pago al huésped ]
-        ↓
-Haces clic en el botón
-        ↓
-Make crea automáticamente el Stripe Payment Link
-por el monto calculado (noches × tarifa)
-        ↓
-Make envía el link directamente al huésped
-con un email de marca de The Hillard
-        ↓
-Listo
-```
-
-Un solo clic. Sin abrir Stripe. Sin copiar links. Sin redactar emails.
-
-### Cómo implementarlo en Make
-
-Make tiene un módulo nativo de Stripe. Los pasos necesarios son:
-
-1. **Conectar Stripe a Make**
-   - En Make: Settings → Connections → Add connection → Stripe
-   - Ingresa tus credenciales de Stripe (API Key)
-
-2. **Agregar un webhook de aprobación**
-   - Make crea una URL única que se activa cuando haces clic en el botón del email
-   - El botón del email apunta a esa URL
-
-3. **Agregar el módulo "Create Payment Link" de Stripe**
-   - Make toma el monto calculado (noches × tarifa) y crea el link automáticamente
-   - El link queda registrado en Stripe igual que si lo hubieras creado tú manualmente
-
-4. **Agregar el módulo "Send Email to Guest"**
-   - Una vez creado el link, Make envía un email al huésped con el link de pago
-   - El email puede llevar el branding de The Hillard (logo, tono, instrucciones)
-
-> **¿Quieres implementar esto?** Claude Cowork puede configurarlo completamente. Solo necesitas darle acceso a Make (abre make.com en la sesión de Claude Cowork) y conectar tu cuenta de Stripe primero (ver sección siguiente). Una vez que ambos estén conectados, Claude Cowork hace el resto.
+> Claude Cowork can make this change entirely on its own. It just needs Make open in its browser. Log in to make.com with `delevilleofficial@gmail.com` and then open Make in the Claude Cowork session.
 
 ---
 
-## 5. Conectar Stripe
+## 4. Proposed improvement: approval email with button
 
-Stripe es el procesador de pagos. Es gratuito crear una cuenta — solo cobran cuando procesas un pago.
+This is the next high-priority improvement to the booking system. It eliminates the manual Stripe step.
 
-### Crear la cuenta
+### Current flow (with friction)
 
-1. Ve a [stripe.com](https://stripe.com)
-2. Haz clic en **Start now** o **Create account**
-3. Usa el email que prefieras para el negocio (recomendado: `delevilleofficial@gmail.com` o `info@thehillard.com` cuando lo crees)
-4. Completa la verificación de identidad y datos bancarios para recibir pagos
+```
+You receive AVAILABLE email
+        ↓
+You open Stripe manually
+        ↓
+You create a Payment Link for the correct amount
+        ↓
+You copy the link
+        ↓
+You open your email
+        ↓
+You compose the email to the guest
+        ↓
+You paste the link and send
+```
 
-**Costo:** ~2.9% + $0.30 por transacción. En una reserva de $8,000, eso son ~$232 de comisión. Sin cuota mensual.
+That is **6–8 manual steps** for every booking you accept.
 
-### Flujo manual (mientras no esté conectado a Make)
+### Proposed flow (single click)
 
-Hasta que implementes la mejora de la sección 4, el flujo manual es:
+```
+You receive AVAILABLE email with button:
+[ ✅ Send payment link to guest ]
+        ↓
+You click the button
+        ↓
+Make automatically creates the Stripe Payment Link
+for the calculated amount (nights × rate)
+        ↓
+Make sends the link directly to the guest
+with a The Hillard branded email
+        ↓
+Done
+```
 
-1. Recibes el email AVAILABLE
-2. Entras a [stripe.com](https://stripe.com) → **Payment Links** en el menú lateral
-3. Haz clic en **New payment link**
-4. Establece el monto (noches × tarifa nightly de la propiedad)
-5. Copia el link generado
-6. Envíaselo al huésped por email
+One single click. No opening Stripe. No copying links. No composing emails.
 
-### Conectar Stripe a Make (para la automatización)
+### How to implement it in Make
 
-Una vez creada la cuenta en Stripe:
+Make has a native Stripe module. The required steps are:
 
-1. En Stripe: ve a **Developers** → **API Keys**
-2. Copia tu **Secret Key** (empieza con `sk_live_...`)
-3. En Make: Settings → Connections → Add → Stripe → pega la Secret Key
+1. **Connect Stripe to Make**
+   - In Make: Settings → Connections → Add connection → Stripe
+   - Enter your Stripe credentials (API Key)
 
-Con eso, Make puede crear Payment Links automáticamente sin que tengas que entrar a Stripe nunca.
+2. **Add an approval webhook**
+   - Make creates a unique URL that is triggered when you click the button in the email
+   - The email button points to that URL
+
+3. **Add the Stripe "Create Payment Link" module**
+   - Make takes the calculated amount (nights × rate) and creates the link automatically
+   - The link is recorded in Stripe just as if you had created it manually
+
+4. **Add the "Send Email to Guest" module**
+   - Once the link is created, Make sends the guest an email with the payment link
+   - The email can carry The Hillard branding (logo, tone, instructions)
+
+> **Want to implement this?** Claude Cowork can configure it entirely. You just need to give it access to Make (open make.com in the Claude Cowork session) and connect your Stripe account first (see next section). Once both are connected, Claude Cowork does the rest.
 
 ---
 
-## 6. Cuenta de Make — acceso y control
+## 5. Connect Stripe
 
-Make es la plataforma donde vive toda la automatización del sistema de reservas.
+Stripe is the payment processor. Creating an account is free — they only charge when you process a payment.
 
-| Dato | Valor |
+### Create the account
+
+1. Go to [stripe.com](https://stripe.com)
+2. Click **Start now** or **Create account**
+3. Use whichever email you prefer for the business (recommended: `delevilleofficial@gmail.com` or `info@thehillard.com` once you create it)
+4. Complete identity verification and banking details to receive payments
+
+**Cost:** ~2.9% + $0.30 per transaction. On an $8,000 booking, that's ~$232 in fees. No monthly charge.
+
+### Manual flow (while not yet connected to Make)
+
+Until you implement the improvement from section 4, the manual flow is:
+
+1. You receive the AVAILABLE email
+2. Go to [stripe.com](https://stripe.com) → **Payment Links** in the side menu
+3. Click **New payment link**
+4. Set the amount (nights × property nightly rate)
+5. Copy the generated link
+6. Send it to the guest by email
+
+### Connect Stripe to Make (for automation)
+
+Once the Stripe account is created:
+
+1. In Stripe: go to **Developers** → **API Keys**
+2. Copy your **Secret Key** (starts with `sk_live_...`)
+3. In Make: Settings → Connections → Add → Stripe → paste the Secret Key
+
+With that, Make can create Payment Links automatically without you ever needing to open Stripe.
+
+---
+
+## 6. Make account — access and control
+
+Make is the platform where all the booking system automation lives.
+
+| Detail | Value |
 |---|---|
 | URL | [make.com](https://make.com) |
-| Cuenta | `delevilleofficial@gmail.com` |
-| Contraseña | La que configuraste al crear la cuenta |
+| Account | `delevilleofficial@gmail.com` |
+| Password | The one you set when creating the account |
 
-### Qué hay configurado en Make
+### What is configured in Make
 
-| Componente | Qué hace |
+| Component | What it does |
 |---|---|
-| **Webhook de entrada** | Recibe los datos del formulario del sitio al instante |
-| **Consulta a Guesty** | Revisa el calendario de reservas en tiempo real |
-| **Detector de conflictos** | Compara las fechas solicitadas contra las ocupadas |
-| **Email AVAILABLE** | Envía los datos del huésped a `delevilleofficial@gmail.com` cuando hay disponibilidad |
-| **Email CONFLICT** | Te avisa cuando las fechas ya están ocupadas |
-| **Email de confirmación al huésped** | Le dice al huésped que su solicitud fue recibida y que lo contactarán en 24 horas |
+| **Incoming webhook** | Receives form data from the site instantly |
+| **Guesty query** | Checks the bookings calendar in real time |
+| **Conflict detector** | Compares requested dates against booked ones |
+| **AVAILABLE email** | Sends guest data to `delevilleofficial@gmail.com` when dates are available |
+| **CONFLICT email** | Alerts you when the dates are already booked |
+| **Guest confirmation email** | Tells the guest their request was received and that they'll be contacted within 24 hours |
 
-### Cómo accede Claude Cowork a Make
+### How Claude Cowork accesses Make
 
-Claude Cowork puede operar Make directamente desde su navegador. Para activarlo:
+Claude Cowork can operate Make directly from its browser. To activate it:
 
-1. Dile a Claude Cowork que abra make.com
-2. Claude Cowork verá el login — inicia sesión con `delevilleofficial@gmail.com`
-3. Una vez dentro, Claude Cowork puede editar escenarios, agregar módulos, conectar servicios, y probar automatizaciones
+1. Tell Claude Cowork to open make.com
+2. Claude Cowork will see the login — sign in with `delevilleofficial@gmail.com`
+3. Once inside, Claude Cowork can edit scenarios, add modules, connect services, and test automations
 
-No necesitas saber hacer eso tú mismo. Claude Cowork es el operador técnico de Make.
+You don't need to know how to do this yourself. Claude Cowork is the technical operator of Make.
 
-### Cambios que Claude Cowork puede hacer en Make
+### Changes Claude Cowork can make in Make
 
-- Agregar `dreamriverventures@gmail.com` como CC en las notificaciones (sección 3)
-- Conectar Stripe e implementar el botón de aprobación (sección 4)
-- Ajustar el texto de los emails de notificación
-- Agregar nuevos pasos al flujo (WhatsApp, Slack, etc.)
-- Cambiar la dirección de email de destino
+- Add `dreamriverventures@gmail.com` as CC on notifications (section 3)
+- Connect Stripe and implement the approval button (section 4)
+- Adjust the text in notification emails
+- Add new steps to the flow (WhatsApp, Slack, etc.)
+- Change the destination email address
 
 ---
 
-## 7. Contacto técnico
+## 7. Technical contact
 
-Para cualquier cambio al sitio, ajuste de automatización, nueva funcionalidad, o consulta técnica:
+For any site changes, automation adjustments, new functionality, or technical questions:
 
 **Santi — @SantiagoGX**
 
-### Qué puede manejar Santi
+### What Santi can handle
 
-- Cambios de diseño o contenido en el sitio
-- Nuevas secciones o funcionalidades
-- Ajustes al sistema de reservas
-- Integraciones con nuevos servicios
-- Problemas técnicos o errores
+- Design or content changes on the site
+- New sections or features
+- Booking system adjustments
+- Integrations with new services
+- Technical issues or errors
 
-### Qué puede manejar Claude Cowork (con acceso)
+### What Claude Cowork can handle (with access)
 
-- Configuraciones en Make (automatizaciones)
-- Cambios en los emails de notificación
-- Conexión de servicios a Make (Stripe, etc.)
-- Ajustes al flujo de reservas
+- Make configurations (automations)
+- Changes to notification emails
+- Connecting services to Make (Stripe, etc.)
+- Booking flow adjustments
 
-### Referencia rápida — cuentas y accesos
+### Quick reference — accounts and access
 
-| Servicio | Email / Cuenta | URL |
+| Service | Email / Account | URL |
 |---|---|---|
 | Cloudflare (hosting) | `dreamriverventures@gmail.com` | [dash.cloudflare.com](https://dash.cloudflare.com) |
-| GitHub (código) | `dreamriverventures@gmail.com` | [github.com/dreamriverventures-ux/the-hillard](https://github.com/dreamriverventures-ux/the-hillard) |
-| Make (automatización) | `delevilleofficial@gmail.com` | [make.com](https://make.com) |
-| Guesty (PMS / calendario) | Tu cuenta Guesty | [app.guesty.com](https://app.guesty.com) |
-| Stripe (pagos) | Por configurar | [stripe.com](https://stripe.com) |
-| Sitio actual | — | [the-hillard.pages.dev](https://the-hillard.pages.dev) |
-| Dominio final | — | thehillard.com (pendiente conexión) |
+| GitHub (code) | `dreamriverventures@gmail.com` | [github.com/dreamriverventures-ux/the-hillard](https://github.com/dreamriverventures-ux/the-hillard) |
+| Make (automation) | `delevilleofficial@gmail.com` | [make.com](https://make.com) |
+| Guesty (PMS / calendar) | Your Guesty account | [app.guesty.com](https://app.guesty.com) |
+| Stripe (payments) | To be configured | [stripe.com](https://stripe.com) |
+| Current site | — | [the-hillard.pages.dev](https://the-hillard.pages.dev) |
+| Final domain | — | thehillard.com (connection pending) |
