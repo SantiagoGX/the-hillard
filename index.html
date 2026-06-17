@@ -607,22 +607,32 @@ nav.scrolled .nav-center-logo img { height: 42px; }
 </head>
 <body>
 
-<nav id="nav">
-  <div class="nav-left">
-    <a href="#" class="nav-wordmark">THE HILLARD</a>
+<!--
+  NAV ANCHOR LINKS — REMOVED 2026-06-17 (restore by putting back both <ul> blocks below)
+
+  Left side (.nav-left), insert after <a href="#" class="nav-wordmark">THE HILLARD</a>:
     <ul class="nav-links">
       <li><a href="#spaces">The House</a></li>
       <li><a href="#amenities">Amenities</a></li>
     </ul>
+
+  Right side (.nav-right), insert before <button ... class="nav-cta">:
+    <ul class="nav-links">
+      <li><a href="#events">Events</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+    </ul>
+
+  Both <ul class="nav-links"> elements are hidden on mobile via @media (max-width: 900px).
+  CSS rules for .nav-links are preserved in the <style> block — do not remove them.
+-->
+<nav id="nav">
+  <div class="nav-left">
+    <a href="#" class="nav-wordmark">THE HILLARD</a>
   </div>
   <a href="#" class="nav-center-logo">
     <img src="photos/logo-house.png" alt="The Hillard">
   </a>
   <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="#events">Events</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-    </ul>
     <button type="button" id="booking-trigger" class="nav-cta">Inquire &amp; Reserve</button>
     <button type="button" id="nav-burger" class="nav-burger" aria-label="Open menu"><span></span><span></span><span></span></button>
     <button type="button" id="nav-book-mobile" class="nav-book-btn booking-open" aria-label="Reserve">Inquire &amp; Reserve</button>
